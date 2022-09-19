@@ -28,10 +28,10 @@
             </div>
             <div class="col-12 mb-2 mt-2">
                 <div class="form-group">
-                    <select name="koujyou_id" class="form-select" class="msg">
+                    <select name="koujyou_id" class="form-select">
                         <option>工場を選択してください</option>
                         @foreach ($koujyous as $koujyou)
-                            <option value="{{ old('id', $koujyou->id) }}"@if($koujyou->id==$syukkakanri->koujyou_id || $koujyou->id === (int)old('id')) selected @endif>{{ $koujyou->meisyou }}</option>
+                        <option class1="{{ $koujyou->id }}" value="{{ old('id', $koujyou->id) }}" @if($koujyou->id==$syukkakanri->koujyou_id || $koujyou->id === (int)old('id')) selected @endif>{{ $koujyou->meisyou }}</option>
                         @endforeach
                     </select>
                     @error('koujyou_id')
@@ -44,7 +44,7 @@
                     <select name="syukkasaki_id" class="form-select">
                         <option>出荷先を選択してください</option>
                         @foreach ($syukkasakis as $syukkasaki)
-                            <option value="{{ old('id', $syukkasaki->id) }}"@if($syukkasaki->id==$syukkakanri->syukkasaki_id || $syukkasaki->id === (int)old('id')) selected @endif>{{ $syukkasaki->meisyou }}</option>
+                        <option class1="{{ $syukkasaki->id }}" class2="{{ $syukkasaki->id }}" value="{{ old('id', $syukkasaki->id) }}" @if($syukkasaki->id==$syukkakanri->syukkasaki_id || $syukkasaki->id === (int)old('id')) selected @endif>{{ $syukkasaki->meisyou }}</option>
                         @endforeach
                     </select>
                     @error('syukkasaki_id')
@@ -57,7 +57,7 @@
                     <select name="genba_id" class="form-select">
                         <option>現場を選択してください</option>
                         @foreach ($genbas as $genba)
-                            <option value="{{ old('id', $genba->id) }}"@if($genba->id==$syukkakanri->genba_id || $genba->id === (int)old('id')) selected @endif class = "{{ $genba->id }}">{{ $genba->meisyou }}</option>
+                        <option class2="{{ $genba->syukkasaki_id }}" value="{{ old('id', $genba->id) }}" @if($genba->id==$syukkakanri->genba_id || $genba->id === (int)old('id')) selected @endif>{{ $genba->meisyou }}</option>
                         @endforeach
                     </select>
                     @error('genba_id')
@@ -70,7 +70,7 @@
                     <select name="koujyouwatashi_id" class="form-select">
                         <option>工場渡しの有無を選択してください</option>
                         @foreach ($koujyouwatashis as $koujyouwatashi)
-                            <option value="{{ old('id', $koujyouwatashi->id) }}"@if($koujyouwatashi->id==$syukkakanri->koujyouwatashi_id || $koujyouwatashi->id === (int)old('id')) selected @endif>{{ $koujyouwatashi->meisyou }}</option>
+                        <option value="{{ old('id', $koujyouwatashi->id) }}" @if($koujyouwatashi->id==$syukkakanri->koujyouwatashi_id || $koujyouwatashi->id === (int)old('id')) selected @endif>{{ $koujyouwatashi->meisyou }}</option>
                         @endforeach
                     </select>
                     @error('koujyouwatashi_id')
@@ -83,7 +83,7 @@
                     <select name="seihinsyubetsu_id" class="form-select">
                         <option>製品種別を選択してください</option>
                         @foreach ($seihinsyubetsus as $seihinsyubetsu)
-                            <option value="{{ old('id', $seihinsyubetsu->id) }}"@if($seihinsyubetsu->id==$syukkakanri->seihinsyubetsu_id || $seihinsyubetsu->id === (int)old('id')) selected @endif>{{ $seihinsyubetsu->meisyou }}</option>
+                        <option value="{{ old('id', $seihinsyubetsu->id) }}" @if($seihinsyubetsu->id==$syukkakanri->seihinsyubetsu_id || $seihinsyubetsu->id === (int)old('id')) selected @endif>{{ $seihinsyubetsu->meisyou }}</option>
                         @endforeach
                     </select>
                     @error('seihinsyubetsu_id')
@@ -93,7 +93,7 @@
             </div>
             <div class="col-12 mb-2 mt-2">
                 <div class="form-group">
-                    <input type="text" name="suuryou" value="{{ $syukkakanri->suuryou }}"  class="form-control" placeholder="打設数量">
+                    <input type="text" name="suuryou" value="{{ $syukkakanri->suuryou }}" class="form-control" placeholder="打設数量">
                     @error('suuryou')
                     <span style="color:red;">数量を数字で入力してください</span>
                     @enderror
@@ -101,7 +101,7 @@
             </div>
             <div class="col-12 mb-2 mt-2">
                 <div class="form-group">
-                    <input type="text" name="motikaerisuuryou" value="{{ $syukkakanri->motikaerisuuryou }}"  class="form-control" placeholder="持帰数量">
+                    <input type="text" name="motikaerisuuryou" value="{{ $syukkakanri->motikaerisuuryou }}" class="form-control" placeholder="持帰数量">
                     @error('motikaerisuuryou')
                     <span style="color:red;">持帰数量を数字で入力してください</span>
                     @enderror
@@ -109,7 +109,7 @@
             </div>
             <div class="col-12 mb-2 mt-2">
                 <div class="form-group">
-                    <input type="text" name="pumpkaisuu" value="{{ $syukkakanri->pumpkaisuu }}"  class="form-control" placeholder="ポンプ車打設回数">
+                    <input type="text" name="pumpkaisuu" value="{{ $syukkakanri->pumpkaisuu }}" class="form-control" placeholder="ポンプ車打設回数">
                     @error('pumpkaisuu')
                     <span style="color:red;">回数を数字で入力してください</span>
                     @enderror
@@ -117,7 +117,7 @@
             </div>
             <div class="col-12 mb-2 mt-2">
                 <div class="form-group">
-                    <input type="text" name="pumpsuuryou" value="{{ $syukkakanri->pumpsuuryou }}"  class="form-control" placeholder="ポンプ車打設数量">
+                    <input type="text" name="pumpsuuryou" value="{{ $syukkakanri->pumpsuuryou }}" class="form-control" placeholder="ポンプ車打設数量">
                 </div>
                 @error('pumpsuuryou')
                 <span style="color:red;">打設数量を数字で入力してください</span>
@@ -128,7 +128,7 @@
                     <select name="kigou_id" class="form-select">
                         <option>記号を選択してください</option>
                         @foreach ($kigous as $kigou)
-                            <option value="{{ old('id', $kigou->id) }}"@if($kigou->id==$syukkakanri->kigou_id || $kigou->id === (int)old('id')) selected @endif>{{ $kigou->meisyou }}</option>
+                        <option value="{{ old('id', $kigou->id) }}" @if($kigou->id==$syukkakanri->kigou_id || $kigou->id === (int)old('id')) selected @endif>{{ $kigou->meisyou }}</option>
                         @endforeach
                     </select>
                     @error('kigou_id')
@@ -141,7 +141,7 @@
                     <select name="yobikyoudo_id" class="form-select">
                         <option>呼び強度を選択してください</option>
                         @foreach ($yobikyoudos as $yobikyoudo)
-                            <option value="{{ old('id', $yobikyoudo->id) }}"@if($yobikyoudo->id==$syukkakanri->yobikyoudo_id || $yobikyoudo->id === (int)old('id')) selected @endif>{{ $yobikyoudo->meisyou }}</option>
+                        <option value="{{ old('id', $yobikyoudo->id) }}" @if($yobikyoudo->id==$syukkakanri->yobikyoudo_id || $yobikyoudo->id === (int)old('id')) selected @endif>{{ $yobikyoudo->meisyou }}</option>
                         @endforeach
                     </select>
                     @error('yobikyoudo_id')
@@ -151,7 +151,7 @@
             </div>
             <div class="col-12 mb-2 mt-2">
                 <div class="form-group">
-                    <input type="text" name="cementryou" value="{{ $syukkakanri->cementryou }}"  class="form-control" placeholder="セメント量">
+                    <input type="text" name="cementryou" value="{{ $syukkakanri->cementryou }}" class="form-control" placeholder="セメント量">
                     @error('cementryou')
                     <span style="color:red;">セメント量を数字で入力してください</span>
                     @enderror
@@ -162,7 +162,7 @@
                     <select name="kotsuzaisunpou_id" class="form-select">
                         <option>骨材寸法を選択してください</option>
                         @foreach ($kotsuzaisunpous as $kotsuzaisunpou)
-                            <option value="{{ old('id', $kotsuzaisunpou->id) }}"@if($kotsuzaisunpou->id==$syukkakanri->kotsuzaisunpou_id || $kotsuzaisunpou->id === (int)old('id')) selected @endif>{{ $kotsuzaisunpou->meisyou }}</option>
+                        <option value="{{ old('id', $kotsuzaisunpou->id) }}" @if($kotsuzaisunpou->id==$syukkakanri->kotsuzaisunpou_id || $kotsuzaisunpou->id === (int)old('id')) selected @endif>{{ $kotsuzaisunpou->meisyou }}</option>
                         @endforeach
                     </select>
                     @error('kotsuzaisunpou_id')
@@ -175,7 +175,7 @@
                     <select name="slump_id" class="form-select">
                         <option>スランプを選択してください</option>
                         @foreach ($slumps as $slump)
-                            <option value="{{ old('id', $slump->id) }}"@if($slump->id==$syukkakanri->slump_id || $slump->id === (int)old('id')) selected @endif>{{ $slump->meisyou }}</option>
+                        <option value="{{ old('id', $slump->id) }}" @if($slump->id==$syukkakanri->slump_id || $slump->id === (int)old('id')) selected @endif>{{ $slump->meisyou }}</option>
                         @endforeach
                     </select>
                     @error('slump_id')
@@ -188,7 +188,7 @@
                     <select name="jissyubetsu_id" class="form-select">
                         <option>JIS種別を選択してください</option>
                         @foreach ($jissyubetsus as $jissyubetsu)
-                        <option value="{{ old('id', $jissyubetsu->id) }}"@if($jissyubetsu->id==$syukkakanri->jissyubetsu_id || $jissyubetsu->id === (int)old('id')) selected @endif>{{ $jissyubetsu->meisyou }}</option>
+                        <option value="{{ old('id', $jissyubetsu->id) }}" @if($jissyubetsu->id==$syukkakanri->jissyubetsu_id || $jissyubetsu->id === (int)old('id')) selected @endif>{{ $jissyubetsu->meisyou }}</option>
                         @endforeach
                     </select>
                     @error('jissyubetsu_id')
@@ -198,7 +198,7 @@
             </div>
             <div class="col-12 mb-2 mt-2">
                 <div class="form-group">
-                    <input type="file" name="daikoushiken" value="{{ $syukkakanri->daikoushiken }}"  class="form-control" placeholder="代行試験">
+                    <input type="file" name="daikoushiken" value="{{ $syukkakanri->daikoushiken }}" class="form-control" placeholder="代行試験">
                 </div>
             </div>
             <div class="col-12 mb-2 mt-2">
@@ -227,4 +227,5 @@
         </div>
     </form>
 </div>
+<script src="{{ asset('js/linkingSelectboxes.js') }}"></script>
 @endsection
