@@ -144,7 +144,13 @@
   </table>
   {{-- Pagination --}}
   <div class="d-flex justify-content-center">
-    {!! $urikake->links() !!}
+    {!! $urikake->appends([
+    'urikakes.hiduke' => $keyword,
+    'koujyous.meisyou' => $keyword,
+    'nounyusakis.meisyou' => $keyword,
+    'genbas.meisyou' => $keyword,
+    'syouhins.meisyou' => $keyword
+    ])->links() !!}
   </div>
   <div>
 
