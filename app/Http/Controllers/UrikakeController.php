@@ -76,19 +76,19 @@ class UrikakeController extends Controller
 
             ->paginate(3);
 
-            $urikake_sum = Urikake::select(
-                'urikakes.koujyou_id',
-                Urikake::raw('sum(case 
+        $urikake_sum = Urikake::select(
+            'urikakes.koujyou_id',
+            Urikake::raw('sum(case 
                 when syouhins.syouhin_syubetsu_id = 2 then
                 (urikakes.suuryou)
                 end) as suuryou'),
-                Urikake::raw('sum(case 
+            Urikake::raw('sum(case 
                 when syouhins.syouhin_syubetsu_id < 2 then
                 ((tankas.tanka + nebikis.nebiki) * urikakes.suuryou)
                 else 
                 ((tankas.tanka) * urikakes.suuryou)
                 end) as kingaku')
-            )
+        )
             ->leftjoin('nebikis', 'nebikis.nounyusaki_id', '=', 'urikakes.nounyusaki_id')
             ->leftjoin('koujyous', 'koujyous.id', '=', 'urikakes.koujyou_id')
             ->leftjoin('nounyusakis', 'nounyusakis.id', '=', 'urikakes.nounyusaki_id')
@@ -100,16 +100,17 @@ class UrikakeController extends Controller
                     ->on('tankas.tanka_syubetsu_id', '=', 'nebikis.tanka_syubetsu_id')
                     ->on('tankas.kaishibi', '<=', 'urikakes.hiduke');
             })
-            ->groupBy('urikakes.koujyou_id'
+            ->groupBy(
+                'urikakes.koujyou_id'
             )
             ->where('urikakes.hiduke', 'LIKE', "%{$keyword}%")
             ->orWhere('koujyous.meisyou', 'LIKE', "%{$keyword}%")
             ->orWhere('nounyusakis.meisyou', 'LIKE', "%{$keyword}%")
             ->orWhere('genbas.meisyou', 'LIKE', "%{$keyword}%")
             ->orWhere('syouhins.meisyou', 'LIKE', "%{$keyword}%")
-            ->get();        
+            ->paginate(3);
 
-        return view('urikake-index', compact('urikake','urikake_sum', 'keyword', 'nebiki', 'koujyou', 'nounyusaki', 'genba', 'syouhin', 'tanka_syubetsu', 'tanka', 'hyouji'));
+        return view('urikake-index', compact('urikake', 'urikake_sum', 'keyword', 'nebiki', 'koujyou', 'nounyusaki', 'genba', 'syouhin', 'tanka_syubetsu', 'tanka', 'hyouji'));
     }
 
     /**
