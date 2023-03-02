@@ -12,7 +12,6 @@ class Tanka_syubetsu extends Model
                 'meisyou',
                 'kana',
                 'hyouji',
-                'narabikae',
                 'bikou'
         ];
 

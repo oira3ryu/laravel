@@ -53,7 +53,6 @@ class UrikakeController extends Controller
             end as kingaku'),
             'urikakes.hyouji',
             'hyoujis.meisyou',
-            'urikakes.narabikae',
             'urikakes.bikou'
         )
             ->leftjoin('nebikis', 'nebikis.nounyusaki_id', '=', 'urikakes.nounyusaki_id')
@@ -73,8 +72,8 @@ class UrikakeController extends Controller
             ->orWhere('nounyusakis.meisyou', 'LIKE', "%{$keyword}%")
             ->orWhere('genbas.meisyou', 'LIKE', "%{$keyword}%")
             ->orWhere('syouhins.meisyou', 'LIKE', "%{$keyword}%")
-
-            ->paginate(3);
+            ->orderBy('hiduke')
+            ->paginate(25);
 
         $urikake_sum = Urikake::select(
             'urikakes.koujyou_id',
@@ -108,7 +107,8 @@ class UrikakeController extends Controller
             ->orWhere('nounyusakis.meisyou', 'LIKE', "%{$keyword}%")
             ->orWhere('genbas.meisyou', 'LIKE', "%{$keyword}%")
             ->orWhere('syouhins.meisyou', 'LIKE', "%{$keyword}%")
-            ->paginate(3);
+            ->orderBy('hiduke')
+            ->paginate(25);
 
         return view('urikake-index', compact('urikake', 'urikake_sum', 'keyword', 'nebiki', 'koujyou', 'nounyusaki', 'genba', 'syouhin', 'tanka_syubetsu', 'tanka', 'hyouji'));
     }
@@ -145,7 +145,6 @@ class UrikakeController extends Controller
             'syouhin_id' => 'required|numeric',
             'suuryou' => 'required|numeric',
             'hyouji' => 'required',
-            'narabikae' => 'max:255',
             'bikou' => 'max:255',
         ]);
         $urikake = Urikake::create($storeData);
@@ -197,7 +196,6 @@ class UrikakeController extends Controller
             'syouhin_id' => 'required|numeric',
             'suuryou' => 'required|numeric',
             'hyouji' => 'required',
-            'narabikae' => 'max:255',
             'bikou' => 'max:255',
         ]);
         Urikake::whereId($id)->update($updateData);

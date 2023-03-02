@@ -36,7 +36,6 @@ class HyoujiController extends Controller
             'meisyou' => 'required|max:255',
             'kana' => 'required|max:255',
             'hyouji' => 'required|numeric',
-            'narabikae' => 'max:255',
             'bikou' => 'max:255',
         ]);
         $hyouji = Hyouji::create($storeData);
@@ -76,7 +75,6 @@ class HyoujiController extends Controller
             'meisyou' => 'required|max:255',
             'kana' => 'required|max:255',
             'hyouji' => 'required|numeric',
-            'narabikae' => 'max:255',
             'bikou' => 'max:255',
         ]);
         Hyouji::whereId($id)->update($updateData);

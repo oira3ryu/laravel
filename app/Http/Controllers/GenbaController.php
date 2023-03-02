@@ -25,7 +25,6 @@ class GenbaController extends Controller
             'genbas.meisyou', 
             'genbas.kana', 
             'hyoujis.meisyou as hyouji', 
-            'genbas.narabikae', 
             'genbas.bikou')
             ->join('koujyous','koujyous.id','=','genbas.koujyou_id')
             ->join('nounyusakis','nounyusakis.id','=','genbas.nounyusaki_id')
@@ -59,7 +58,6 @@ class GenbaController extends Controller
             'meisyou' => 'required|max:255',
             'kana' => 'required|max:255',
             'hyouji' => 'required|numeric',
-            'narabikae' => 'max:255',
             'bikou' => 'max:255',
         ]);
         $genba = Genba::create($storeData);
@@ -104,7 +102,6 @@ class GenbaController extends Controller
             'meisyou' => 'required|max:255',
             'kana' => 'required|max:255',
             'hyouji' => 'required|numeric',
-            'narabikae' => 'max:255',
             'bikou' => 'max:255',
         ]);
         Genba::whereId($id)->update($updateData);

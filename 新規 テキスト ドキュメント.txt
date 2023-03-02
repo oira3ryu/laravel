@@ -1,0 +1,1 @@
+Auto-detected PostgreSQL 15 installation with the data directory at C:\Program Files\PostgreSQL\15\data

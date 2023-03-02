@@ -31,8 +31,7 @@ CREATE TABLE `tanka_syubetsus` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `meisyou` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `kana` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `hyouji` tinyint(1) NOT NULL DEFAULT '1',
-  `narabikae` int(11) DEFAULT NULL,
+  `hyouji` int(1) NOT NULL DEFAULT '1',
   `bikou` text COLLATE utf8mb4_unicode_ci,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
@@ -42,9 +41,9 @@ CREATE TABLE `tanka_syubetsus` (
 -- テーブルのデータのダンプ `tanka_syubetsus`
 --
 
-INSERT INTO `tanka_syubetsus` (`id`, `meisyou`, `kana`, `hyouji`, `narabikae`, `bikou`, `updated_at`, `created_at`) VALUES
-(1, '標準', 'ヒョウジュン', 1, 1, NULL, '2023-01-22 00:53:30', '2022-11-03 04:30:41'),
-(2, '設計', 'セッケイ', 1, 2, '', '2022-11-03 04:30:41', '2022-11-03 04:30:41');
+INSERT INTO `tanka_syubetsus` (`id`, `meisyou`, `kana`, `hyouji`, `bikou`, `updated_at`, `created_at`) VALUES
+(1, '標準', 'ヒョウジュン', 1, '', '2023-01-22 00:53:30', '2022-11-03 04:30:41'),
+(2, '設計', 'セッケイ', 1, '', '2022-11-03 04:30:41', '2022-11-03 04:30:41');
 
 --
 -- ダンプしたテーブルのインデックス

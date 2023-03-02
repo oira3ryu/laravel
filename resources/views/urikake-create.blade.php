@@ -105,11 +105,6 @@
                 <span style="color:red;">選択してください</span>
                 @enderror
             </div>
-            <div class="form-group @if(!empty($errors->first('narabikae'))) has-error @endif">
-                <label for="narabikae">並替</label>
-                <input type="text" value="{{old('narabikae')}}" class="form-control" name="narabikae" />
-                <span class="help-block">{{$errors->first('narabikae')}}</span>
-            </div>
             <div class="form-group @if(!empty($errors->first('bikou'))) has-error @endif">
                 <label for="bikou">備考</label>
                 <input type="text" value="{{old('bikou')}}" class="form-control" name="bikou" />

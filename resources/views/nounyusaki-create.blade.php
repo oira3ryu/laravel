@@ -62,10 +62,6 @@
         @enderror
       </div>
       <div class="form-group">
-        <label for="narabikae">並替</label>
-        <input type="text" class="form-control" name="narabikae" />
-      </div>
-      <div class="form-group">
         <label for="bikou">備考</label>
         <input type="text" class="form-control" name="bikou" />
       </div>

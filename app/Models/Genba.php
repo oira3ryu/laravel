@@ -13,7 +13,6 @@ class Genba extends Model
                 'meisyou',
                 'kana',
                 'hyouji',
-                'narabikae',
                 'bikou'
         ];
 }

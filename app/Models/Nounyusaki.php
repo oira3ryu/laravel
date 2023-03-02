@@ -13,7 +13,6 @@ class Nounyusaki extends Model
                 'meisyou',
                 'kana',
                 'hyouji',
-                'narabikae',
                 'bikou'
         ];
 }

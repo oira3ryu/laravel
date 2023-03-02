@@ -31,8 +31,7 @@ CREATE TABLE `hyoujis` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `meisyou` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `kana` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `hyouji` tinyint(1) NOT NULL DEFAULT '1',
-  `narabikae` int(11) DEFAULT NULL,
+  `hyouji` int(1) NOT NULL DEFAULT '1',
   `bikou` text COLLATE utf8mb4_unicode_ci,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
@@ -42,9 +41,9 @@ CREATE TABLE `hyoujis` (
 -- テーブルのデータのダンプ `hyoujis`
 --
 
-INSERT INTO `hyoujis` (`id`, `meisyou`, `kana`, `hyouji`, `narabikae`, `bikou`, `updated_at`, `created_at`) VALUES
-(1, '表示', 'ヒョウジ', 1, 1, 'test', '2023-01-21 17:04:52', '2023-01-22 02:03:28'),
-(2, '非表示', 'ヒヒョウジ', 1, 2, NULL, '2023-01-22 02:03:56', '2023-01-22 02:03:56');
+INSERT INTO `hyoujis` (`id`, `meisyou`, `kana`, `hyouji`, `bikou`, `updated_at`, `created_at`) VALUES
+(1, '表示', 'ヒョウジ', 1, '', '2023-01-21 17:04:52', '2023-01-22 02:03:28'),
+(2, '非表示', 'ヒヒョウジ', 1, '', '2023-01-22 02:03:56', '2023-01-22 02:03:56');
 
 --
 -- ダンプしたテーブルのインデックス

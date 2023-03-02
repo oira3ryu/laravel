@@ -61,10 +61,6 @@
         @enderror
       </div>
       <div class="form-group">
-        <label for="narabikae">並替</label>
-        <input type="text" class="form-control" name="narabikae" value="{{ $nounyusaki->narabikae }}" />
-      </div>
-      <div class="form-group">
         <label for="bikou">備考</label>
         <input type="text" class="form-control" name="bikou" value="{{ $nounyusaki->bikou }}" />
       </div>

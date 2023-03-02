@@ -17,8 +17,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->text('meisyou');
             $table->text('kana');
-            $table->boolean('hyouji')->default(1);
-            $table->integer('narabikae')->nullable();
+            $table->integer('hyouji')->default(1);
             $table->text('bikou')->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();
             $table->timestamp('created_at')->useCurrent()->nullable();

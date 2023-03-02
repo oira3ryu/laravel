@@ -29,7 +29,6 @@ class NebikiController extends Controller
             'nebikis.kaishibi',
             'nebikis.syuuryoubi',
             'nebikis.hyouji',
-            'nebikis.narabikae',
             'nebikis.bikou')
             ->join('nounyusakis','nounyusakis.id','=','nebikis.nounyusaki_id')
             ->join('tanka_syubetsus','tanka_syubetsus.id','=','nebikis.tanka_syubetsu_id')
@@ -66,9 +65,7 @@ class NebikiController extends Controller
             'nebiki' => 'required|numeric',            
             'kaishibi' => 'date',
             'syuuryoubi' => 'date',
-            'nebiki' => 'numeric',
             'hyouji' => 'required|numeric',
-            'narabikae' => 'max:255',
             'bikou' => 'max:255',
         ]);
         $nebiki = Nebiki::create($storeData);
@@ -98,7 +95,7 @@ class NebikiController extends Controller
         $koujyou = Koujyou::all();
         $hyouji = Hyouji::all();
         $nounyusaki = Nounyusaki::all();        
-        return view('nebiki-edit', compact('nebiki','nounyusaki','hyouji','koujyou','tanka_syubetsu'));
+        return view('nebiki-edit', compact('nounyusaki','hyouji','koujyou','tanka_syubetsu'));
     }
 
     /**
@@ -116,9 +113,7 @@ class NebikiController extends Controller
             'nebiki' => 'required|numeric',            
             'kaishibi' => 'date',
             'syuuryoubi' => 'date',
-            'nebiki' => 'numeric',
             'hyouji' => 'required|numeric',
-            'narabikae' => 'max:255',
             'bikou' => 'max:255',
         ]);
         Nebiki::whereId($id)->update($updateData);

@@ -12,7 +12,6 @@ class Koujyou extends Model
                 'meisyou',
                 'kana',
                 'hyouji',
-                'narabikae',
                 'bikou'
 	];
 }

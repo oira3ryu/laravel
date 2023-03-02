@@ -19,7 +19,6 @@ class Tanka_syubetsuController extends Controller
             'tanka_syubetsus.meisyou',
             'tanka_syubetsus.kana',
             'hyoujis.meisyou as hyouji',
-            'tanka_syubetsus.narabikae',
             'tanka_syubetsus.bikou')
             ->join('hyoujis','hyoujis.id','=','tanka_syubetsus.hyouji')
             ->get();
@@ -47,7 +46,6 @@ class Tanka_syubetsuController extends Controller
             'meisyou' => 'required|max:255',
             'kana' => 'required|max:255',
             'hyouji' => 'required|numeric',
-            'narabikae' => 'max:255',
             'bikou' => 'max:255',
         ]);
         $tanka_syubetsu = Tanka_syubetsu::create($storeData);
@@ -88,7 +86,6 @@ class Tanka_syubetsuController extends Controller
             'meisyou' => 'required|max:255',
             'kana' => 'required|max:255',
             'hyouji' => 'required|numeric',
-            'narabikae' => 'max:255',
             'bikou' => 'max:255',
         ]);
         Tanka_syubetsu::whereId($id)->update($updateData);

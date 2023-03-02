@@ -26,7 +26,6 @@ class TankaController extends Controller
             'tankas.kaishibi',
             'tankas.syuuryoubi',
             'hyoujis.meisyou as hyouji',
-            'tankas.narabikae',
             'tankas.bikou')
             ->join('syouhins','syouhins.id','=','tankas.syouhin_id')            
             ->join('tanka_syubetsus','tanka_syubetsus.id','=','tankas.tanka_syubetsu_id')
@@ -62,7 +61,6 @@ class TankaController extends Controller
             'kaishibi' => 'required|date',
             'syuuryoubi' => 'date',
             'hyouji' => 'required|numeric',
-            'narabikae' => 'max:255',
             'bikou' => 'max:255',
         ]);
         $tanka = Tanka::create($storeData);
@@ -109,7 +107,6 @@ class TankaController extends Controller
             'kaishibi' => 'required|date',
             'syuuryoubi' => 'date',
             'hyouji' => 'required|numeric',
-            'narabikae' => 'max:255',
             'bikou' => 'max:255',
         ]);
         Tanka::whereId($id)->update($updateData);

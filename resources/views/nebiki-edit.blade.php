@@ -66,8 +66,8 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="nebiki" 値引</label>
-                    <input type="text" class="form-control" name="nebiki" value="{{ $nebiki->nebiki }}" />
+                <label for="nebiki">値引</label>
+                <input type="text" class="form-control" name="nebiki" value="{{ $nebiki->nebiki }}" />
             </div>
             <div class="form-group">
                 <label for="kaishibi">開始日</label>
@@ -89,10 +89,6 @@
                 @error('hyouji')
                 <span style="color:red;">選択してください</span>
                 @enderror
-            </div>
-            <div class="form-group">
-                <label for="narabikae">並替</label>
-                <input type="text" class="form-control" name="narabikae" value="{{ $nebiki->narabikae }}" />
             </div>
             <div class="form-group">
                 <label for="bikou">備考</label>

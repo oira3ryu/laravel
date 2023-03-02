@@ -31,8 +31,7 @@ CREATE TABLE `koujyous` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `meisyou` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `kana` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `hyouji` tinyint(1) NOT NULL DEFAULT '1',
-  `narabikae` int(11) DEFAULT NULL,
+  `hyouji` int(1) NOT NULL DEFAULT '1',
   `bikou` text COLLATE utf8mb4_unicode_ci,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
@@ -42,9 +41,9 @@ CREATE TABLE `koujyous` (
 -- テーブルのデータのダンプ `koujyous`
 --
 
-INSERT INTO `koujyous` (`id`, `meisyou`, `kana`, `hyouji`, `narabikae`, `bikou`, `updated_at`, `created_at`) VALUES
-(1, '鬼脇工場', 'オニワキコウジョウ', 1, 1, 'test', '2023-01-22 19:04:37', '2022-12-16 02:43:11'),
-(2, '沓形工場', 'クツガタコウジョウ', 2, 2, 'test', '2023-01-22 22:02:04', '2022-12-16 02:43:58');
+INSERT INTO `koujyous` (`id`, `meisyou`, `kana`, `hyouji`, `bikou`, `updated_at`, `created_at`) VALUES
+(1, '鬼脇工場', 'オニワキコウジョウ', 1, '', '2023-01-22 19:04:37', '2022-12-16 02:43:11'),
+(2, '沓形工場', 'クツガタコウジョウ', 2, '', '2023-01-22 22:02:04', '2022-12-16 02:43:58');
 
 --
 -- ダンプしたテーブルのインデックス

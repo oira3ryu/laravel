@@ -38,9 +38,6 @@
       
     </div>
     <div class="col-sm">
-      
-    </div>
-    <div class="col-sm">
       <a href="{{ route('urikakes.index')}}" class="btn btn-info btn-sm m-1">売掛</a>
     </div>
     <div class="col-sm">
@@ -58,7 +55,6 @@
           <td>開始日</td>
           <td>終了日</td>
           <td>表示</td>
-          <td>並替</td>
           <td>備考</td>
           <td class="text-center">編集</td>
         </tr>
@@ -73,7 +69,6 @@
             <td>{{$tankas->kaishibi}}</td>
             <td>{{$tankas->syuuryoubi}}</td>
             <td>{{$tankas->hyouji}}</td>
-            <td>{{$tankas->narabikae}}</td>
             <td>{{$tankas->bikou}}</td>
             <td class="text-center">
                 <a href="{{ route('tankas.edit', $tankas->id)}}" class="btn btn-primary btn-sm"">編集</a>

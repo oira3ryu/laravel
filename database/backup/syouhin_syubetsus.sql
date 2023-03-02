@@ -31,8 +31,7 @@ CREATE TABLE `syouhin_syubetsus` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `meisyou` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `kana` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `hyouji` tinyint(1) NOT NULL DEFAULT '1',
-  `narabikae` int(11) DEFAULT NULL,
+  `hyouji` int(1) NOT NULL DEFAULT '1',
   `bikou` text COLLATE utf8mb4_unicode_ci,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
@@ -42,13 +41,13 @@ CREATE TABLE `syouhin_syubetsus` (
 -- テーブルのデータのダンプ `syouhin_syubetsus`
 --
 
-INSERT INTO `syouhin_syubetsus` (`id`, `meisyou`, `kana`, `hyouji`, `narabikae`, `bikou`, `updated_at`, `created_at`) VALUES
-(1, 'モルタル', 'モルタル', 1, 1, NULL, '2023-01-21 22:32:35', '2022-11-03 04:04:18'),
-(2, '生コン', 'ナマコン', 1, 2, '', '2022-11-03 04:04:18', '2022-11-03 04:04:18'),
-(3, '商品売上', 'ショウヒンウリアゲ', 1, 3, '', '2022-11-03 04:04:18', '2022-11-03 04:04:18'),
-(4, '割増', 'ワリマシ', 1, 4, '', '2022-11-03 04:04:18', '2022-11-03 04:04:18'),
-(5, '代行試験手数料', 'ダイコウシケンテスウリョウ', 1, 5, '', '2022-11-03 04:04:18', '2022-11-03 04:04:18'),
-(6, 'ポンプ車', 'ポンプシャ', 1, 6, '', '2022-11-03 04:04:18', '2022-11-03 04:04:18');
+INSERT INTO `syouhin_syubetsus` (`id`, `meisyou`, `kana`, `hyouji`, `bikou`, `updated_at`, `created_at`) VALUES
+(1, 'モルタル', 'モルタル', 1, NULL, '2023-01-21 22:32:35', '2022-11-03 04:04:18'),
+(2, '生コン', 'ナマコン', 1, '', '2022-11-03 04:04:18', '2022-11-03 04:04:18'),
+(3, '商品売上', 'ショウヒンウリアゲ', 1, '', '2022-11-03 04:04:18', '2022-11-03 04:04:18'),
+(4, '割増', 'ワリマシ', 1, '', '2022-11-03 04:04:18', '2022-11-03 04:04:18'),
+(5, '代行試験手数料', 'ダイコウシケンテスウリョウ', 1, '', '2022-11-03 04:04:18', '2022-11-03 04:04:18'),
+(6, 'ポンプ車', 'ポンプシャ', 1, '', '2022-11-03 04:04:18', '2022-11-03 04:04:18');
 
 --
 -- ダンプしたテーブルのインデックス

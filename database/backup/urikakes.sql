@@ -35,8 +35,7 @@ CREATE TABLE `urikakes` (
   `tanka` double(9,2) NOT NULL,
   `suuryou` double(6,2) NOT NULL,
   `kingaku` double(13,2) NOT NULL,
-  `hyouji` tinyint(1) NOT NULL DEFAULT '1',
-  `narabikae` int(11) DEFAULT NULL,
+  `hyouji` int(1) NOT NULL DEFAULT '1',
   `bikou` text COLLATE utf8mb4_unicode_ci,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
@@ -46,9 +45,9 @@ CREATE TABLE `urikakes` (
 -- テーブルのデータのダンプ `urikakes`
 --
 
-INSERT INTO `urikakes` (`id`, `hiduke`, `genba_id`, `syouhin_id`, `tanka`, `suuryou`, `kingaku`, `hyouji`, `narabikae`, `bikou`, `updated_at`, `created_at`) VALUES
-(1, '2022-04-06', 2, 9, 100.00, 0.90, 100.00, 1, NULL, NULL, '2023-01-30 02:58:07', '2023-01-30 02:58:07'),
-(2, '2022-04-08', 3, 9, 500.00, 0.50, 2000.00, 1, NULL, NULL, '2023-02-01 13:57:38', '2023-02-01 13:57:38');
+INSERT INTO `urikakes` (`id`, `hiduke`, `genba_id`, `syouhin_id`, `tanka`, `suuryou`, `kingaku`, `hyouji`, `bikou`, `updated_at`, `created_at`) VALUES
+(1, '2022-04-06', 2, 9, 100.00, 0.90, 100.00, 1, '', '2023-01-30 02:58:07', '2023-01-30 02:58:07'),
+(2, '2022-04-08', 3, 9, 500.00, 0.50, 2000.00, 1, '', '2023-02-01 13:57:38', '2023-02-01 13:57:38');
 
 --
 -- ダンプしたテーブルのインデックス

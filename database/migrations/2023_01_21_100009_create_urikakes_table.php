@@ -35,8 +35,7 @@ return new class extends Migration
             $table->float('tanka', 9, 2);
             $table->float('suuryou', 6, 2);
             $table->float('kingaku', 13, 2);
-            $table->boolean('hyouji')->default(1);
-            $table->integer('narabikae')->nullable();
+            $table->integer('hyouji')->default(1);
             $table->text('bikou')->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();
             $table->timestamp('created_at')->useCurrent()->nullable();

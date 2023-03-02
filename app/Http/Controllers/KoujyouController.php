@@ -19,7 +19,6 @@ class KoujyouController extends Controller
             'koujyous.meisyou', 
             'koujyous.kana', 
             'hyoujis.meisyou as hyouji', 
-            'koujyous.narabikae', 
             'koujyous.bikou')
             ->join('hyoujis','hyoujis.id','=','koujyous.hyouji')
             ->get();
@@ -47,7 +46,6 @@ class KoujyouController extends Controller
             'meisyou' => 'required|max:255',
             'kana' => 'required|max:255',
             'hyouji' => 'required|numeric',
-            'narabikae' => 'max:255',
             'bikou' => 'max:255',            
         ]);
         $koujyou = Koujyou::create($storeData);
@@ -88,7 +86,6 @@ class KoujyouController extends Controller
             'meisyou' => 'required|max:255',
             'kana' => 'required|max:255',
             'hyouji' => 'required|numeric',
-            'narabikae' => 'max:255',
             'bikou' => 'max:255',
         ]);
         Koujyou::whereId($id)->update($updateData);

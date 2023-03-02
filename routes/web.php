@@ -11,6 +11,7 @@ use App\Http\Controllers\TankaController;
 use App\Http\Controllers\Tanka_syubetsuController;
 use App\Http\Controllers\UrikakeController;
 use App\Http\Controllers\NebikiController;
+use App\Http\Controllers\EmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +38,4 @@ Route::resource('tankas', TankaController::class);
 Route::resource('tanka_syubetsus', Tanka_syubetsuController::class);
 Route::resource('urikakes', UrikakeController::class);
 Route::resource('nebikis', NebikiController::class);
+Route::resource('emp', EmployeeController::class);

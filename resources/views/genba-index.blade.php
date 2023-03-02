@@ -41,9 +41,6 @@
 
       </div>
       <div class="col-sm">
-
-      </div>
-      <div class="col-sm">
         <a href="{{ route('urikakes.index')}}" class="btn btn-info btn-sm m-1">売掛</a>
       </div>
       <div class="col-sm">
@@ -60,7 +57,6 @@
         <td>名称</td>
         <td>カナ</td>
         <td>表示</td>
-        <td>並替</td>
         <td>備考</td>
         <td class="text-center">編集</td>
       </tr>
@@ -74,7 +70,6 @@
         <td>{{$genbas->meisyou}}</td>
         <td>{{$genbas->kana}}</td>
         <td>{{$genbas->hyouji}}</td>
-        <td>{{$genbas->narabikae}}</td>
         <td>{{$genbas->bikou}}</td>
         <td class="text-center">
           <a href="{{ route('genbas.edit', $genbas->id)}}" class="btn btn-primary btn-sm"">編集</a>

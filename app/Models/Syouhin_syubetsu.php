@@ -12,7 +12,6 @@ class Syouhin_syubetsu extends Model
                 'meisyou',
                 'kana',
                 'hyouji',
-                'narabikae',
                 'bikou'
         ];
 }

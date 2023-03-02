@@ -26,8 +26,7 @@ return new class extends Migration
             $table->integer('tanka');
             $table->date('kaishibi');
             $table->date('syuuryoubi');
-            $table->boolean('hyouji')->default(1);
-            $table->integer('narabikae')->nullable();
+            $table->integer('hyouji')->default(1);
             $table->text('bikou')->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();
             $table->timestamp('created_at')->useCurrent()->nullable();

@@ -16,7 +16,6 @@ class Urikake extends Model
                 'syouhin_id',
                 'suuryou',
                 'hyouji',
-                'narabikae',
                 'bikou'
         ];
 

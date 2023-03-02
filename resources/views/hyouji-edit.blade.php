@@ -38,10 +38,6 @@
               <input type="text" class="form-control" name="hyouji" value="{{ $hyouji->hyouji }}"/>
           </div>
           <div class="form-group">
-              <label for="narabikae">並替</label>
-              <input type="text" class="form-control" name="narabikae" value="{{ $hyouji->narabikae }}"/>
-          </div>
-          <div class="form-group">
               <label for="bikou">備考</label>
               <input type="text" class="form-control" name="bikou" value="{{ $hyouji->bikou }}"/>
           </div>          

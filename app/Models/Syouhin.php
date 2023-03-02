@@ -13,7 +13,6 @@ class Syouhin extends Model
                 'meisyou',
                 'kana',
                 'hyouji',
-                'narabikae',
                 'bikou'
         ];
 

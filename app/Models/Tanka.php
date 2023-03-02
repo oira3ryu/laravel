@@ -15,7 +15,6 @@ class Tanka extends Model
                 'kaishibi',
                 'syuuryoubi',
                 'hyouji',
-                'narabikae',
                 'bikou'
         ];
 

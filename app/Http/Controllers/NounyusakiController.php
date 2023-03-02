@@ -22,7 +22,6 @@ class NounyusakiController extends Controller
             'nounyusakis.meisyou', 
             'nounyusakis.kana', 
             'hyoujis.meisyou as hyouji', 
-            'nounyusakis.narabikae', 
             'nounyusakis.bikou')
             ->join('koujyous','koujyous.id','=','nounyusakis.koujyou_id')
             ->join('hyoujis','hyoujis.id','=','nounyusakis.hyouji')
@@ -54,7 +53,6 @@ class NounyusakiController extends Controller
             'kana' => 'required|max:255',
             'nounyusaki' => 'required|numeric',
             'hyouji' => 'required|numeric',
-            'narabikae' => 'max:255',
             'bikou' => 'max:255',
         ]);
         $nounyusaki = Nounyusaki::create($storeData);
@@ -98,7 +96,6 @@ class NounyusakiController extends Controller
             'kana' => 'required|max:255',
             'nounyusaki' => 'required|numeric',
             'hyouji' => 'required|numeric',
-            'narabikae' => 'max:255',
             'bikou' => 'max:255',
         ]);
         Nounyusaki::whereId($id)->update($updateData);

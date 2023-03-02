@@ -12,7 +12,6 @@ class Hyouji extends Model
                 'meisyou',
                 'kana',
                 'hyouji',
-                'narabikae',
                 'bikou'
         ];
 }

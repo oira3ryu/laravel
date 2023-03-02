@@ -41,9 +41,6 @@
       
     </div>
     <div class="col-sm">
-      
-    </div>
-    <div class="col-sm">
       <a href="{{ route('urikakes.index')}}" class="btn btn-info btn-sm m-1">売掛</a>
     </div>
     <div class="col-sm">
@@ -59,7 +56,6 @@
           <td>名称</td>
           <td>カナ</td>
           <td>表示</td>
-          <td>並替</td>
           <td>備考</td>
           <td class="text-center">編集</td>
         </tr>
@@ -72,7 +68,6 @@
             <td>{{$syouhins->meisyou}}</td>
             <td>{{$syouhins->kana}}</td>
             <td>{{$syouhins->hyouji}}</td>
-            <td>{{$syouhins->narabikae}}</td>
             <td>{{$syouhins->bikou}}</td>
             <td class="text-center">
                 <a href="{{ route('syouhins.edit', $syouhins->id)}}" class="btn btn-primary btn-sm"">編集</a>

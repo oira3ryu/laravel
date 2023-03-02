@@ -22,7 +22,6 @@ class SyouhinController extends Controller
             'syouhins.meisyou',
             'syouhins.kana',
             'hyoujis.meisyou as hyouji',
-            'syouhins.narabikae',
             'syouhins.bikou')
             ->join('syouhin_syubetsus','syouhin_syubetsus.id','=','syouhins.syouhin_syubetsu_id') 
             ->join('hyoujis','hyoujis.id','=','syouhins.hyouji')
@@ -53,7 +52,6 @@ class SyouhinController extends Controller
             'meisyou' => 'required|max:255',
             'kana' => 'required|max:255',
             'hyouji' => 'required|numeric',
-            'narabikae' => 'max:255',
             'bikou' => 'max:255',
         ]);
         $syouhin = Syouhin::create($storeData);
@@ -96,7 +94,6 @@ class SyouhinController extends Controller
             'meisyou' => 'required|max:255',
             'kana' => 'required|max:255',
             'hyouji' => 'required|numeric',
-            'narabikae' => 'max:255',
             'bikou' => 'max:255',
         ]);
         Syouhin::whereId($id)->update($updateData);
