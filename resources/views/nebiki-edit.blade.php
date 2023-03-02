@@ -31,7 +31,7 @@
                 <select name="koujyou_id" class="form-control">
                     <option>選択してください</option>
                     @foreach ($koujyou as $koujyous)
-                    <option class="{{ $koujyous->id }}" class1="{{ $koujyous->id }}" value="{{ old('id', $koujyous->id) }}" @if($koujyous->id==$nounyusaki->koujyou_id || $koujyous->id === (int)old('id')) selected @endif>{{ $koujyous->meisyou }}
+                    <option class="{{ $koujyous->id }}" class1="{{ $koujyous->id }}" value="{{ old('id', $koujyous->id) }}" @if($koujyous->id==$nebiki->koujyou_id || $koujyous->id === (int)old('id')) selected @endif>{{ $koujyous->meisyou }}
                     </option>
                     @endforeach
                 </select>
