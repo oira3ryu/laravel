@@ -38,7 +38,7 @@
         <select name="hyouji" class="form-control">
           <option>選択してください</option>
           @foreach ($hyouji as $hyoujis)
-          <option class="form-control" value="hyouji">
+          <option class="form-control" value="hyouji_id">
             {{ $hyoujis->meisyou }}
           </option>
           @endforeach

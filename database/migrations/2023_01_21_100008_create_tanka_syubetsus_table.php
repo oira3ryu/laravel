@@ -17,7 +17,10 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->text('meisyou');
             $table->text('kana');
-            $table->integer('hyouji')->default(1);
+            $table->unsignedBigInteger('hyouji_id')->default(1);
+            $table->foreign('hyouji_id')
+                ->references('id')
+                ->on('hyoujis');
             $table->text('bikou')->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();
             $table->timestamp('created_at')->useCurrent()->nullable();

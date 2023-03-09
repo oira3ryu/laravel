@@ -13,20 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tankas', function (Blueprint $table) {
+        Schema::create('kijyunbis', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('syouhin_id');
-            $table->foreign('syouhin_id')
-                    ->references('id')
-                    ->on('syouhins');
-            $table->unsignedBigInteger('tanka_syubetsu_id');
-            $table->foreign('tanka_syubetsu_id')
-                    ->references('id')
-                    ->on('tanka_syubetsus');
-            $table->integer('tanka');
-            $table->date('kaishibi');
-            $table->date('syuuryoubi');
-            $table->integer('hyouji')->default(1);
+            $table->date('hiduke');
+            $table->unsignedBigInteger('hyouji_id')->default(1);
+            $table->foreign('hyouji_id')
+                ->references('id')
+                ->on('hyoujis');
             $table->text('bikou')->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();
             $table->timestamp('created_at')->useCurrent()->nullable();
@@ -40,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tankas');
+        Schema::dropIfExists('kijyunbis');
     }
 };

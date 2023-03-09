@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\Tanka_syubetsu;
 use App\Models\Hyouji;
@@ -13,16 +15,18 @@ class Tanka_syubetsuController extends Controller
      */
     public function index()
     {
-        $hyouji = Hyouji::all();        
+        $hyouji = Hyouji::all();
         $tanka_syubetsu = Tanka_syubetsu::select(
             'tanka_syubetsus.id',
             'tanka_syubetsus.meisyou',
             'tanka_syubetsus.kana',
-            'hyoujis.meisyou as hyouji',
-            'tanka_syubetsus.bikou')
-            ->join('hyoujis','hyoujis.id','=','tanka_syubetsus.hyouji')
+            'tanka_syubetsus.hyouji_id',
+            'hyoujis.meisyou',
+            'tanka_syubetsus.bikou'
+        )
+            ->join('hyoujis', 'hyoujis.id', '=', 'tanka_syubetsus.hyouji_id')
             ->get();
-        return view('tanka_syubetsu-index', compact('tanka_syubetsu','hyouji'));
+        return view('tanka_syubetsu-index', compact('tanka_syubetsu', 'hyouji'));
     }
     /**
      * Show the form for creating a new resource.
@@ -31,7 +35,7 @@ class Tanka_syubetsuController extends Controller
      */
     public function create()
     {
-        $hyouji = Hyouji::all();         
+        $hyouji = Hyouji::all();
         return view('tanka_syubetsu-create', compact('hyouji'));
     }
     /**
@@ -45,7 +49,7 @@ class Tanka_syubetsuController extends Controller
         $storeData = $request->validate([
             'meisyou' => 'required|max:255',
             'kana' => 'required|max:255',
-            'hyouji' => 'required|numeric',
+            'hyouji_id' => 'required|numeric',
             'bikou' => 'max:255',
         ]);
         $tanka_syubetsu = Tanka_syubetsu::create($storeData);
@@ -69,7 +73,7 @@ class Tanka_syubetsuController extends Controller
      */
     public function edit($id)
     {
-        $hyouji = Hyouji::all();        
+        $hyouji = Hyouji::all();
         $tanka_syubetsu = Tanka_syubetsu::findOrFail($id);
         return view('tanka_syubetsu-edit', compact('tanka_syubetsu', 'hyouji'));
     }
@@ -85,7 +89,7 @@ class Tanka_syubetsuController extends Controller
         $updateData = $request->validate([
             'meisyou' => 'required|max:255',
             'kana' => 'required|max:255',
-            'hyouji' => 'required|numeric',
+            'hyouji_id' => 'required|numeric',
             'bikou' => 'max:255',
         ]);
         Tanka_syubetsu::whereId($id)->update($updateData);

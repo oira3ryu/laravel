@@ -22,7 +22,6 @@ class UrikakeController extends Controller
      */
     public function index(Request $request)
     {
-        $total = 0;
         $keyword = $request->input('keyword');
         $nebiki = Nebiki::all();
         $koujyou = Koujyou::all();
@@ -43,74 +42,46 @@ class UrikakeController extends Controller
             'genbas.meisyou',
             'urikakes.syouhin_id',
             'syouhins.meisyou',
+            'tankas.kaishibi',
             'tankas.tanka',
             'urikakes.suuryou',
             Urikake::raw('case 
-             when syouhins.syouhin_syubetsu_id < 2 then
+             when syouhins.syouhin_syubetsu_id <= 2 then
              ((tankas.tanka + nebikis.nebiki) * urikakes.suuryou)
             else 
              ((tankas.tanka) * urikakes.suuryou)
             end as kingaku'),
-            'urikakes.hyouji',
+            'urikakes.hyouji_id',
             'hyoujis.meisyou',
-            'urikakes.bikou'
+            'urikakes.bikou',
+            'nebikis.tanka_syubetsu_id'
         )
-            ->leftjoin('nebikis', 'nebikis.nounyusaki_id', '=', 'urikakes.nounyusaki_id')
-            ->leftjoin('koujyous', 'koujyous.id', '=', 'urikakes.koujyou_id')
-            ->leftjoin('nounyusakis', 'nounyusakis.id', '=', 'urikakes.nounyusaki_id')
-            ->leftjoin('genbas', 'genbas.id', '=', 'urikakes.genba_id')
-            ->leftjoin('syouhins', 'syouhins.id', '=', 'urikakes.syouhin_id')
-            ->leftjoin('hyoujis', 'hyoujis.id', '=', 'urikakes.hyouji')
-            ->leftjoin('tanka_syubetsus', 'tanka_syubetsus.id', '=', 'nebikis.tanka_syubetsu_id')
-            ->leftjoin('tankas', function ($join) {
-                $join->on('tankas.syouhin_id', '=', 'urikakes.syouhin_id')
-                    ->on('tankas.tanka_syubetsu_id', '=', 'nebikis.tanka_syubetsu_id')
-                    ->on('tankas.kaishibi', '<=', 'urikakes.hiduke');
+            ->leftjoin('tankas', 'urikakes.syouhin_id', '=', 'tankas.syouhin_id')
+            ->leftjoin('tanka_syubetsus', 'tankas.tanka_syubetsu_id', '=', 'tanka_syubetsus.id')
+            ->leftjoin('nounyusakis', 'urikakes.nounyusaki_id', '=', 'nounyusakis.id')
+            ->leftjoin('koujyous', 'urikakes.koujyou_id', '=', 'koujyous.id')
+            ->leftjoin('genbas', 'urikakes.genba_id', '=', 'genbas.id')
+            ->leftjoin('syouhins', 'urikakes.syouhin_id', '=', 'syouhins.id')
+            ->leftjoin('hyoujis', 'urikakes.hyouji_id', '=', 'hyoujis.id')
+            ->rightjoin('nebikis', function ($join) {
+                $join->on('urikakes.nounyusaki_id', '=', 'nebikis.nounyusaki_id')
+                    ->on('nounyusakis.id', '=', 'nebikis.nounyusaki_id')
+                    ->on('nebikis.tanka_syubetsu_id', '=', 'tanka_syubetsus.id');
             })
-            ->where('urikakes.hiduke', 'LIKE', "%{$keyword}%")
-            ->orWhere('koujyous.meisyou', 'LIKE', "%{$keyword}%")
-            ->orWhere('nounyusakis.meisyou', 'LIKE', "%{$keyword}%")
-            ->orWhere('genbas.meisyou', 'LIKE', "%{$keyword}%")
-            ->orWhere('syouhins.meisyou', 'LIKE', "%{$keyword}%")
-            ->orderBy('hiduke')
-            ->paginate(25);
-
-        $urikake_sum = Urikake::select(
-            'urikakes.koujyou_id',
-            Urikake::raw('sum(case 
-                when syouhins.syouhin_syubetsu_id = 2 then
-                (urikakes.suuryou)
-                end) as suuryou'),
-            Urikake::raw('sum(case 
-                when syouhins.syouhin_syubetsu_id < 2 then
-                ((tankas.tanka + nebikis.nebiki) * urikakes.suuryou)
-                else 
-                ((tankas.tanka) * urikakes.suuryou)
-                end) as kingaku')
-        )
-            ->leftjoin('nebikis', 'nebikis.nounyusaki_id', '=', 'urikakes.nounyusaki_id')
-            ->leftjoin('koujyous', 'koujyous.id', '=', 'urikakes.koujyou_id')
-            ->leftjoin('nounyusakis', 'nounyusakis.id', '=', 'urikakes.nounyusaki_id')
-            ->leftjoin('genbas', 'genbas.id', '=', 'urikakes.genba_id')
-            ->leftjoin('syouhins', 'syouhins.id', '=', 'urikakes.syouhin_id')
-            ->leftjoin('tanka_syubetsus', 'tanka_syubetsus.id', '=', 'nebikis.tanka_syubetsu_id')
-            ->leftjoin('tankas', function ($join) {
-                $join->on('tankas.syouhin_id', '=', 'urikakes.syouhin_id')
-                    ->on('tankas.tanka_syubetsu_id', '=', 'nebikis.tanka_syubetsu_id')
-                    ->on('tankas.kaishibi', '<=', 'urikakes.hiduke');
-            })
-            ->groupBy(
-                'urikakes.koujyou_id'
+            ->where(
+                'tankas.kaishibi',
+                '>=',
+                Urikake::raw(
+                    '(SELECT MAX(tankas.kaishibi) FROM tankas, tanka_syubetsus, urikakes, nebikis 
+                    WHERE tankas.syouhin_id = urikakes.syouhin_id 
+                    AND tankas.tanka_syubetsu_id = nebikis.tanka_syubetsu_id
+                    AND tanka_syubetsus.id = nebikis.tanka_syubetsu_id)'
+                )
             )
-            ->where('urikakes.hiduke', 'LIKE', "%{$keyword}%")
-            ->orWhere('koujyous.meisyou', 'LIKE', "%{$keyword}%")
-            ->orWhere('nounyusakis.meisyou', 'LIKE', "%{$keyword}%")
-            ->orWhere('genbas.meisyou', 'LIKE', "%{$keyword}%")
-            ->orWhere('syouhins.meisyou', 'LIKE', "%{$keyword}%")
-            ->orderBy('hiduke')
-            ->paginate(25);
+            ->orderByRaw('hiduke desc, id desc')
+            ->get();
 
-        return view('urikake-index', compact('urikake', 'urikake_sum', 'keyword', 'nebiki', 'koujyou', 'nounyusaki', 'genba', 'syouhin', 'tanka_syubetsu', 'tanka', 'hyouji'));
+        return view('urikake-index', compact('urikake', 'keyword', 'nebiki', 'koujyou', 'nounyusaki', 'genba', 'syouhin', 'tanka_syubetsu', 'tanka', 'hyouji'));
     }
 
     /**
@@ -139,12 +110,12 @@ class UrikakeController extends Controller
     {
         $storeData = $request->validate([
             'hiduke' => 'required|date',
-            'koujyou_id' => 'required|numeric',
-            'nounyusaki_id' => 'required|numeric',
-            'genba_id' => 'required|numeric',
-            'syouhin_id' => 'required|numeric',
+            'koujyou_id' => 'required',
+            'nounyusaki_id' => 'required',
+            'genba_id' => 'required',
+            'syouhin_id' => 'required',
             'suuryou' => 'required|numeric',
-            'hyouji' => 'required',
+            'hyouji_id' => 'required',
             'bikou' => 'max:255',
         ]);
         $urikake = Urikake::create($storeData);
@@ -190,12 +161,12 @@ class UrikakeController extends Controller
     {
         $updateData = $request->validate([
             'hiduke' => 'required|date',
-            'koujyou_id' => 'required|numeric',
-            'nounyusaki_id' => 'required|numeric',
-            'genba_id' => 'required|numeric',
-            'syouhin_id' => 'required|numeric',
+            'koujyou_id' => 'required',
+            'nounyusaki_id' => 'required',
+            'genba_id' => 'required',
+            'syouhin_id' => 'required',
             'suuryou' => 'required|numeric',
-            'hyouji' => 'required',
+            'hyouji_id' => 'required',
             'bikou' => 'max:255',
         ]);
         Urikake::whereId($id)->update($updateData);

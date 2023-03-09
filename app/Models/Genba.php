@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Genba extends Model
 {
-    use HasFactory;
-	        protected $fillable = [
+        use HasFactory;
+        protected $fillable = [
+                'koujyou_id',
                 'nounyusaki_id',
                 'meisyou',
                 'kana',
-                'hyouji',
+                'hyouji_id',
                 'bikou'
         ];
 }

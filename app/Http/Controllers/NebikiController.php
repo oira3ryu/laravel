@@ -18,24 +18,27 @@ class NebikiController extends Controller
      */
     public function index()
     {
+        $koujyou = Koujyou::all();
         $tanka_syubetsu = Tanka_syubetsu::all();
         $hyouji = Hyouji::all();
         $nounyusaki = Nounyusaki::all();
         $nebiki = Nebiki::select(
             'nebikis.id',
-            'nounyusakis.meisyou as nounyusaki_id',
-            'tanka_syubetsus.meisyou as tanka_syubetsu_id',
+            'nebikis.koujyou_id',
+            'nebikis.nounyusaki_id',
+            'nebikis.tanka_syubetsu_id',
             'nebikis.nebiki',
             'nebikis.kaishibi',
             'nebikis.syuuryoubi',
-            'nebikis.hyouji',
+            'nebikis.hyouji_id',
             'nebikis.bikou'
         )
+            ->join('koujyous', 'koujyous.id', '=', 'nebikis.koujyou_id')
             ->join('nounyusakis', 'nounyusakis.id', '=', 'nebikis.nounyusaki_id')
             ->join('tanka_syubetsus', 'tanka_syubetsus.id', '=', 'nebikis.tanka_syubetsu_id')
-            ->join('hyoujis', 'hyoujis.id', '=', 'nebikis.hyouji')
+            ->join('hyoujis', 'hyoujis.id', '=', 'nebikis.hyouji_id')
             ->get();
-        return view('nebiki-index', compact('nebiki', 'hyouji', 'nounyusaki', 'tanka_syubetsu'));
+        return view('nebiki-index', compact('nebiki', 'koujyou', 'hyouji', 'nounyusaki', 'tanka_syubetsu'));
     }
 
     /**
@@ -61,12 +64,13 @@ class NebikiController extends Controller
     public function store(Request $request)
     {
         $storeData = $request->validate([
+            'koujyou_id' => 'required|numeric',
             'nounyusaki_id' => 'required|numeric',
             'tanka_syubetsu_id' => 'required|numeric',
             'nebiki' => 'required|numeric',
             'kaishibi' => 'date',
             'syuuryoubi' => 'date',
-            'hyouji' => 'required|numeric',
+            'hyouji_id' => 'required|numeric',
             'bikou' => 'max:255',
         ]);
         $nebiki = Nebiki::create($storeData);
@@ -96,7 +100,7 @@ class NebikiController extends Controller
         $koujyou = Koujyou::all();
         $hyouji = Hyouji::all();
         $nounyusaki = Nounyusaki::all();
-        $nebiki = Nebiki::findOrFail($id);        
+        $nebiki = Nebiki::findOrFail($id);
         return view('nebiki-edit', compact('nebiki', 'nounyusaki', 'hyouji', 'koujyou', 'tanka_syubetsu'));
     }
 
@@ -110,12 +114,13 @@ class NebikiController extends Controller
     public function update(Request $request, $id)
     {
         $updateData = $request->validate([
+            'koujyou_id' => 'required|numeric',
             'nounyusaki_id' => 'required|numeric',
             'tanka_syubetsu_id' => 'required|numeric',
             'nebiki' => 'required|numeric',
             'kaishibi' => 'date',
             'syuuryoubi' => 'date',
-            'hyouji' => 'required|numeric',
+            'hyouji_id' => 'required|numeric',
             'bikou' => 'max:255',
         ]);
         Nebiki::whereId($id)->update($updateData);

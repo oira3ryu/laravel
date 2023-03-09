@@ -1,0 +1,37 @@
+SELECT 
+urikakes.id,
+urikakes.hiduke, 
+urikakes.koujyou_id,
+koujyous.meisyou,
+urikakes.nounyusaki_id,
+nounyusakis.meisyou,
+urikakes.genba_id,
+genbas.meisyou,
+urikakes.syouhin_id,
+syouhins.meisyou,
+tankas.kaishibi, 
+tankas.tanka, 
+urikakes.suuryou,
+case 
+when syouhins.syouhin_syubetsu_id < 2 then
+ ((tankas.tanka + nebikis.nebiki) * urikakes.suuryou)
+else 
+ ((tankas.tanka) * urikakes.suuryou)
+end as kingaku,
+urikakes.hyouji,
+hyoujis.meisyou,
+urikakes.bikou,
+nebikis.tanka_syubetsu_id FROM urikakes 
+LEFT JOIN tankas ON urikakes.syouhin_id = tankas.syouhin_id
+LEFT JOIN tanka_syubetsus ON tankas.tanka_syubetsu_id = tanka_syubetsus.id
+LEFT JOIN nounyusakis ON urikakes.nounyusaki_id = nounyusakis.id
+LEFT JOIN koujyous ON urikakes.koujyou_id = koujyous.id
+LEFT JOIN genbas ON urikakes.genba_id = genbas.id
+LEFT JOIN syouhins ON urikakes.syouhin_id = syouhins.id
+LEFT JOIN hyoujis ON urikakes.hyouji = hyoujis.id
+RIGHT JOIN nebikis ON urikakes.nounyusaki_id = nebikis.nounyusaki_id AND nounyusakis.id = nebikis.nounyusaki_id AND nebikis.tanka_syubetsu_id = tanka_syubetsus.id
+WHERE tankas.kaishibi >= 
+(SELECT MAX(tankas.kaishibi) FROM tankas, tanka_syubetsus, urikakes, nebikis 
+ WHERE tankas.syouhin_id = urikakes.syouhin_id 
+ AND tankas.tanka_syubetsu_id = nebikis.tanka_syubetsu_id
+AND tanka_syubetsus.id = nebikis.tanka_syubetsu_id)

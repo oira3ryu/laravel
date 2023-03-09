@@ -64,13 +64,25 @@
     <tbody>
       @foreach($genba as $genbas)
       <tr>
-        <td>{{$genbas->id}}</td>
-        <td>{{$genbas->koujyou_id}}</td>
-        <td>{{$genbas->nounyusaki_id}}</td>
-        <td>{{$genbas->meisyou}}</td>
-        <td>{{$genbas->kana}}</td>
-        <td>{{$genbas->hyouji}}</td>
-        <td>{{$genbas->bikou}}</td>
+        <td>{{ $genbas->id }}</td>
+        @foreach ($koujyou as $koujyous)
+        @if($genbas->koujyou_id == $koujyous->id)
+        <td>{{ $koujyous->meisyou }}</td>
+        @endif
+        @endforeach
+        @foreach ($nounyusaki as $nounyusakis)
+        @if($genbas->nounyusaki_id == $nounyusakis->id)
+        <td>{{ $nounyusakis->meisyou }}</td>
+        @endif
+        @endforeach
+        <td>{{ $genbas->meisyou }}</td>
+        <td>{{ $genbas->kana }}</td>
+        @foreach ($hyouji as $hyoujis)
+        @if($genbas->hyouji_id == $hyoujis->id)
+        <td>{{ $hyoujis->meisyou }}</td>
+        @endif
+        @endforeach
+        <td>{{ $genbas->bikou }}</td>
         <td class="text-center">
           <a href="{{ route('genbas.edit', $genbas->id)}}" class="btn btn-primary btn-sm"">編集</a>
                 <form action=" {{ route('genbas.destroy', $genbas->id)}}" method="post" style="display: inline-block">

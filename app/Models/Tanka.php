@@ -7,15 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tanka extends Model
 {
-    use HasFactory;
-	        protected $fillable = [
+        use HasFactory;
+        protected $fillable = [
                 'syouhin_id',
                 'tankasyubetsu_id',
                 'tanka',
                 'kaishibi',
                 'syuuryoubi',
-                'hyouji',
+                'hyouji_id',
                 'bikou'
         ];
-
 }

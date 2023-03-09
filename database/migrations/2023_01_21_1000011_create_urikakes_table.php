@@ -18,24 +18,27 @@ return new class extends Migration
             $table->date('hiduke');
             $table->unsignedBigInteger('koujyou_id');
             $table->foreign('koujyou_id')
-                    ->references('id')
-                    ->on('koujyous');
+                ->references('id')
+                ->on('koujyous');
             $table->unsignedBigInteger('nounyusaki_id');
             $table->foreign('nounyusaki_id')
-                    ->references('id')
-                    ->on('nounyusakis');
+                ->references('id')
+                ->on('nounyusakis');
             $table->unsignedBigInteger('genba_id');
             $table->foreign('genba_id')
-                    ->references('id')
-                    ->on('genbas');
+                ->references('id')
+                ->on('genbas');
             $table->unsignedBigInteger('syouhin_id');
             $table->foreign('syouhin_id')
-                    ->references('id')
-                    ->on('syouhins');
+                ->references('id')
+                ->on('syouhins');
             $table->float('tanka', 9, 2);
             $table->float('suuryou', 6, 2);
             $table->float('kingaku', 13, 2);
-            $table->integer('hyouji')->default(1);
+            $table->unsignedBigInteger('hyouji_id')->default(1);
+            $table->foreign('hyouji_id')
+                ->references('id')
+                ->on('hyoujis');
             $table->text('bikou')->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();
             $table->timestamp('created_at')->useCurrent()->nullable();

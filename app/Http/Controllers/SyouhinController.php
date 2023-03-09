@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\Syouhin;
 use App\Models\Syouhin_syubetsu;
@@ -15,18 +17,21 @@ class SyouhinController extends Controller
     public function index()
     {
         $hyouji = Hyouji::all();
-        $syouhin_syubetsu = Syouhin_syubetsu::all(); 
+        $syouhin_syubetsu = Syouhin_syubetsu::all();
         $syouhin = Syouhin::select(
             'syouhins.id',
-            'syouhin_syubetsus.meisyou as syouhin_syubetsu_id',
+            'syouhins.syouhin_syubetsu_id',
+            'syouhin_syubetsus.meisyou',
             'syouhins.meisyou',
             'syouhins.kana',
-            'hyoujis.meisyou as hyouji',
-            'syouhins.bikou')
-            ->join('syouhin_syubetsus','syouhin_syubetsus.id','=','syouhins.syouhin_syubetsu_id') 
-            ->join('hyoujis','hyoujis.id','=','syouhins.hyouji')
-            ->get();         
-        return view('syouhin-index', compact('syouhin','syouhin_syubetsu','hyouji'));
+            'syouhins.hyouji_id',
+            'hyoujis.meisyou',
+            'syouhins.bikou'
+        )
+            ->join('syouhin_syubetsus', 'syouhin_syubetsus.id', '=', 'syouhins.syouhin_syubetsu_id')
+            ->join('hyoujis', 'hyoujis.id', '=', 'syouhins.hyouji_id')
+            ->get();
+        return view('syouhin-index', compact('syouhin', 'syouhin_syubetsu', 'hyouji'));
     }
     /**
      * Show the form for creating a new resource.
@@ -36,8 +41,8 @@ class SyouhinController extends Controller
     public function create()
     {
         $hyouji = Hyouji::all();
-        $syouhin_syubetsu = Syouhin_syubetsu::all();         
-        return view('syouhin-create', compact('syouhin_syubetsu','hyouji'));
+        $syouhin_syubetsu = Syouhin_syubetsu::all();
+        return view('syouhin-create', compact('syouhin_syubetsu', 'hyouji'));
     }
     /**
      * Store a newly created resource in storage.
@@ -51,7 +56,7 @@ class SyouhinController extends Controller
             'syouhin_syubetsu_id' => 'required|numeric',
             'meisyou' => 'required|max:255',
             'kana' => 'required|max:255',
-            'hyouji' => 'required|numeric',
+            'hyouji_id' => 'required|numeric',
             'bikou' => 'max:255',
         ]);
         $syouhin = Syouhin::create($storeData);
@@ -78,7 +83,7 @@ class SyouhinController extends Controller
         $hyouji = Hyouji::all();
         $syouhin_syubetsu = Syouhin_syubetsu::all();
         $syouhin = Syouhin::findOrFail($id);
-        return view('syouhin-edit', compact('syouhin','syouhin_syubetsu','hyouji'));
+        return view('syouhin-edit', compact('syouhin', 'syouhin_syubetsu', 'hyouji'));
     }
     /**
      * Update the specified resource in storage.
@@ -93,7 +98,7 @@ class SyouhinController extends Controller
             'syouhin_syubetsu_id' => 'required|numeric',
             'meisyou' => 'required|max:255',
             'kana' => 'required|max:255',
-            'hyouji' => 'required|numeric',
+            'hyouji_id' => 'required|numeric',
             'bikou' => 'max:255',
         ]);
         Syouhin::whereId($id)->update($updateData);

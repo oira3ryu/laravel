@@ -17,15 +17,18 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('koujyou_id');
             $table->foreign('koujyou_id')
-                    ->references('id')
-                    ->on('koujyous');
+                ->references('id')
+                ->on('koujyous');
             $table->unsignedBigInteger('nounyusaki_id');
             $table->foreign('nounyusaki_id')
-                    ->references('id')
-                    ->on('nounyusakis');
+                ->references('id')
+                ->on('nounyusakis');
             $table->text('meisyou');
             $table->text('kana');
-            $table->integer('hyouji')->default(1);
+            $table->unsignedBigInteger('hyouji_id')->default(1);
+            $table->foreign('hyouji_id')
+                ->references('id')
+                ->on('hyoujis');
             $table->text('bikou')->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();
             $table->timestamp('created_at')->useCurrent()->nullable();

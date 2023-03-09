@@ -38,18 +38,12 @@
         <a href="{{ route('nebikis.index')}}" class="btn btn-info btn-sm m-1">値引</a>
       </div>
       <div class="col-sm">
-
+        <a href="{{ route('kijyunbis.index')}}" class="btn btn-info btn-sm m-1">基準日</a>
       </div>
       <div class="col-sm">
 
       </div>
-      <!--       <div class="col-sm">
-        <form action="{{ route('urikakes.index') }}" method="GET">
-          <input type="text" name="keyword" id="keyword" value="{{ $keyword }}">
-          <input type="submit" class="btn btn-info btn-sm m-1" value="検索">
-          <input type="button" class="btn btn-info btn-sm m-1" name="reset" value="クリア" onclick="clearKeyword()">
-        </form>
-      </div> -->
+
       <div class="col-sm">
         <a href="{{ route('urikakes.create')}}" class="btn btn-info btn-sm m-1">追加</a>
       </div>
@@ -102,7 +96,7 @@
         <td>{{ number_format($urikakes->suuryou,1) }}</td>
         <td class="text-right" class1="kingaku">{{number_format($urikakes->kingaku)}}</td>
         @foreach ($hyouji as $hyoujis)
-        @if($urikakes->hyouji == $hyoujis->id)
+        @if($urikakes->hyouji_id == $hyoujis->id)
         <td>{{ $hyoujis->meisyou }}</td>
         @endif
         @endforeach
@@ -120,7 +114,6 @@
       </tr>
       @endforeach
     </tbody>
-    <th data-field="Amount" data-searchable="true" data-class="tdDetails" data-footer-formatter="TotalFormatter">Amount</th>
     <tfoot>
       <tr class="table-warning">
         <td></td>
@@ -138,19 +131,7 @@
     </tfoot>
 
   </table>
-  <div>
-    <p class="sum_kingaku">合計：0円</p>
-  </div>
-  <!--   {{-- Pagination --}}
-  <div class="d-flex justify-content-center">
-    {!! $urikake->appends([
-    'urikakes.hiduke' => $keyword,
-    'koujyous.meisyou' => $keyword,
-    'nounyusakis.meisyou' => $keyword,
-    'genbas.meisyou' => $keyword,
-    'syouhins.meisyou' => $keyword
-    ])->links() !!}
-  </div> -->
+
   <div>
 
     @endsection

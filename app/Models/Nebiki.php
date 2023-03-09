@@ -8,12 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Nebiki extends Model
 {
     use HasFactory;
-        protected $fillable = [
-            'nounyusaki_id', 
-            'nebiki', 
-            'kaishibi', 
-            'syuuryoubi', 
-            'hyouji', 
-            'bikou'
-        ];
+    protected $fillable = [
+        'koujyou_id',
+        'nounyusaki_id',
+        'nebiki',
+        'kaishibi',
+        'syuuryoubi',
+        'hyouji_id',
+        'bikou'
+    ];
 }

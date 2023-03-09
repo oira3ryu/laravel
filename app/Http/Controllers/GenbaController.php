@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\Genba;
 use App\Models\Hyouji;
@@ -19,18 +21,22 @@ class GenbaController extends Controller
         $koujyou = Koujyou::all();
         $nounyusaki = Nounyusaki::all();
         $genba = Genba::select(
-            'genbas.id', 
-            'koujyous.meisyou as koujyou_id',
-            'nounyusakis.meisyou as nounyusaki_id',                        
-            'genbas.meisyou', 
-            'genbas.kana', 
-            'hyoujis.meisyou as hyouji', 
-            'genbas.bikou')
-            ->join('koujyous','koujyous.id','=','genbas.koujyou_id')
-            ->join('nounyusakis','nounyusakis.id','=','genbas.nounyusaki_id')
-            ->join('hyoujis','hyoujis.id','=','genbas.hyouji')
+            'genbas.id',
+            'genbas.koujyou_id',
+            //'koujyous.meisyou',
+            'genbas.nounyusaki_id',
+            //'nounyusakis.meisyou',
+            'genbas.meisyou',
+            'genbas.kana',
+            //'hyoujis.meisyou',
+            'genbas.hyouji_id',
+            'genbas.bikou'
+        )
+            ->join('koujyous', 'koujyous.id', '=', 'genbas.koujyou_id')
+            ->join('nounyusakis', 'nounyusakis.id', '=', 'genbas.nounyusaki_id')
+            ->join('hyoujis', 'hyoujis.id', '=', 'genbas.hyouji_id')
             ->get();
-        return view('genba-index', compact('genba','koujyou','nounyusaki','hyouji'));
+        return view('genba-index', compact('genba', 'koujyou', 'nounyusaki', 'hyouji'));
     }
     /**
      * Show the form for creating a new resource.
@@ -39,10 +45,10 @@ class GenbaController extends Controller
      */
     public function create()
     {
-        $koujyou = Koujyou::all();          
+        $koujyou = Koujyou::all();
         $hyouji = Hyouji::all();
-        $nounyusaki = Nounyusaki::all();                  
-        return view('genba-create', compact('koujyou', 'hyouji','nounyusaki'));
+        $nounyusaki = Nounyusaki::all();
+        return view('genba-create', compact('koujyou', 'hyouji', 'nounyusaki'));
     }
     /**
      * Store a newly created resource in storage.
@@ -53,11 +59,11 @@ class GenbaController extends Controller
     public function store(Request $request)
     {
         $storeData = $request->validate([
-            'koujyou_id' => 'required|numeric',
-            'nounyusaki_id' => 'required|numeric', 
+            'koujyou_id' => 'required',
+            'nounyusaki_id' => 'required',
             'meisyou' => 'required|max:255',
             'kana' => 'required|max:255',
-            'hyouji' => 'required|numeric',
+            'hyouji_id' => 'required',
             'bikou' => 'max:255',
         ]);
         $genba = Genba::create($storeData);
@@ -85,7 +91,7 @@ class GenbaController extends Controller
         $koujyou = Koujyou::all();
         $nounyusaki = Nounyusaki::all();
         $genba = Genba::findOrFail($id);
-        return view('genba-edit', compact('genba','koujyou','nounyusaki','hyouji'));
+        return view('genba-edit', compact('genba', 'koujyou', 'nounyusaki', 'hyouji'));
     }
     /**
      * Update the specified resource in storage.
@@ -97,11 +103,11 @@ class GenbaController extends Controller
     public function update(Request $request, $id)
     {
         $updateData = $request->validate([
-            'koujyou_id' => 'required|numeric',
-            'nounyusaki_id' => 'required|numeric', 
+            'koujyou_id' => 'required',
+            'nounyusaki_id' => 'required',
             'meisyou' => 'required|max:255',
             'kana' => 'required|max:255',
-            'hyouji' => 'required|numeric',
+            'hyouji_id' => 'required',
             'bikou' => 'max:255',
         ]);
         Genba::whereId($id)->update($updateData);

@@ -96,7 +96,7 @@
                 <select name="hyouji" class="form-control">
                     <option>選択してください</option>
                     @foreach ($hyouji as $hyoujis)
-                    <option class="form-control" value="{{ $hyoujis->hyouji }}">
+                    <option class="form-control" value="{{ $hyoujis->id }}">
                         {{ $hyoujis->meisyou }}
                     </option>
                     @endforeach

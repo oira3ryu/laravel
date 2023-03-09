@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Nounyusaki extends Model
 {
-    use HasFactory;
-	        protected $fillable = [
+        use HasFactory;
+        protected $fillable = [
                 'koujyou_id',
                 'meisyou',
                 'kana',
-                'hyouji',
+                'hyouji_id',
                 'bikou'
         ];
 }

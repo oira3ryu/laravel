@@ -7,16 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Urikake extends Model
 {
-    use HasFactory;
-	        protected $fillable = [
+        use HasFactory;
+        protected $fillable = [
                 'hiduke',
                 'koujyou_id',
                 'nounyusaki_id',
                 'genba_id',
                 'syouhin_id',
                 'suuryou',
-                'hyouji',
+                'hyouji_id',
                 'bikou'
         ];
-
 }

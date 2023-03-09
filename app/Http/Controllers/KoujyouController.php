@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\Koujyou;
 use App\Models\Hyouji;
@@ -15,12 +17,13 @@ class KoujyouController extends Controller
     {
         $hyouji = Hyouji::all();
         $koujyou = Koujyou::select(
-            'koujyous.id', 
-            'koujyous.meisyou', 
-            'koujyous.kana', 
-            'hyoujis.meisyou as hyouji', 
-            'koujyous.bikou')
-            ->join('hyoujis','hyoujis.id','=','koujyous.hyouji')
+            'koujyous.id',
+            'koujyous.meisyou',
+            'koujyous.kana',
+            'koujyous.hyouji_id',
+            'koujyous.bikou'
+        )
+            ->join('hyoujis', 'hyoujis.id', '=', 'koujyous.hyouji_id')
             ->get();
         return view('koujyou-index', compact('koujyou', 'hyouji'));
     }
@@ -31,7 +34,7 @@ class KoujyouController extends Controller
      */
     public function create()
     {
-        $hyouji = Hyouji::all();        
+        $hyouji = Hyouji::all();
         return view('koujyou-create', compact('hyouji'));
     }
     /**
@@ -45,8 +48,8 @@ class KoujyouController extends Controller
         $storeData = $request->validate([
             'meisyou' => 'required|max:255',
             'kana' => 'required|max:255',
-            'hyouji' => 'required|numeric',
-            'bikou' => 'max:255',            
+            'hyouji_id' => 'required|numeric',
+            'bikou' => 'max:255',
         ]);
         $koujyou = Koujyou::create($storeData);
         return redirect('/koujyous')->with('completed', 'Koujyou has been saved!');
@@ -85,7 +88,7 @@ class KoujyouController extends Controller
         $updateData = $request->validate([
             'meisyou' => 'required|max:255',
             'kana' => 'required|max:255',
-            'hyouji' => 'required|numeric',
+            'hyouji_id' => 'required|numeric',
             'bikou' => 'max:255',
         ]);
         Koujyou::whereId($id)->update($updateData);

@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\Nounyusaki;
 use App\Models\Hyouji;
@@ -17,16 +19,19 @@ class NounyusakiController extends Controller
         $hyouji = Hyouji::all();
         $koujyou = Koujyou::all();
         $nounyusaki = Nounyusaki::select(
-            'nounyusakis.id', 
-            'koujyous.meisyou as koujyou_id',
-            'nounyusakis.meisyou', 
-            'nounyusakis.kana', 
-            'hyoujis.meisyou as hyouji', 
-            'nounyusakis.bikou')
-            ->join('koujyous','koujyous.id','=','nounyusakis.koujyou_id')
-            ->join('hyoujis','hyoujis.id','=','nounyusakis.hyouji')
+            'nounyusakis.id',
+            'nounyusakis.koujyou_id',
+            'koujyous.meisyou',
+            'nounyusakis.meisyou',
+            'nounyusakis.kana',
+            'nounyusakis.hyouji_id',
+            //'hyoujis.meisyou',
+            'nounyusakis.bikou'
+        )
+            ->join('koujyous', 'koujyous.id', '=', 'nounyusakis.koujyou_id')
+            ->join('hyoujis', 'hyoujis.id', '=', 'nounyusakis.hyouji_id')
             ->get();
-        return view('nounyusaki-index', compact('nounyusaki','koujyou','hyouji'));
+        return view('nounyusaki-index', compact('nounyusaki', 'koujyou', 'hyouji'));
     }
     /**
      * Show the form for creating a new resource.
@@ -36,8 +41,8 @@ class NounyusakiController extends Controller
     public function create()
     {
         $hyouji = Hyouji::all();
-        $koujyou = Koujyou::all();        
-        return view('nounyusaki-create', compact('koujyou','hyouji'));
+        $koujyou = Koujyou::all();
+        return view('nounyusaki-create', compact('koujyou', 'hyouji'));
     }
     /**
      * Store a newly created resource in storage.
@@ -52,7 +57,7 @@ class NounyusakiController extends Controller
             'meisyou' => 'required|max:255',
             'kana' => 'required|max:255',
             'nounyusaki' => 'required|numeric',
-            'hyouji' => 'required|numeric',
+            'hyouji_id' => 'required|numeric',
             'bikou' => 'max:255',
         ]);
         $nounyusaki = Nounyusaki::create($storeData);
@@ -79,7 +84,7 @@ class NounyusakiController extends Controller
         $hyouji = Hyouji::all();
         $koujyou = Koujyou::all();
         $nounyusaki = Nounyusaki::findOrFail($id);
-        return view('nounyusaki-edit', compact('nounyusaki','koujyou','hyouji'));
+        return view('nounyusaki-edit', compact('nounyusaki', 'koujyou', 'hyouji'));
     }
     /**
      * Update the specified resource in storage.
@@ -95,7 +100,7 @@ class NounyusakiController extends Controller
             'meisyou' => 'required|max:255',
             'kana' => 'required|max:255',
             'nounyusaki' => 'required|numeric',
-            'hyouji' => 'required|numeric',
+            'hyouji_id' => 'required|numeric',
             'bikou' => 'max:255',
         ]);
         Nounyusaki::whereId($id)->update($updateData);

@@ -52,7 +52,7 @@
         <select name="hyouji" class="form-control">
           <option>選択してください</option>
           @foreach ($hyouji as $hyoujis)
-          <option class="{{ $hyoujis->id }}" value="{{ old('id', $hyoujis->id) }}" @if($hyoujis->id==$nounyusaki->hyouji || $hyoujis->id === (int)old('id')) selected @endif>{{ $hyoujis->meisyou }}
+          <option class="{{ $hyoujis->id }}" value="{{ old('id', $hyoujis->id) }}" @if($hyoujis->id==$nounyusaki->hyouji_id || $hyoujis->id === (int)old('id')) selected @endif>{{ $hyoujis->meisyou }}
           </option>
           @endforeach
         </select>
