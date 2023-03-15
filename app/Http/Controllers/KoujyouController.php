@@ -24,6 +24,7 @@ class KoujyouController extends Controller
             'koujyous.bikou'
         )
             ->join('hyoujis', 'hyoujis.id', '=', 'koujyous.hyouji_id')
+            ->orderByRaw('id desc')
             ->get();
         return view('koujyou-index', compact('koujyou', 'hyouji'));
     }

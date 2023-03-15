@@ -48,8 +48,8 @@
         <input type="text" class="form-control" name="kana" />
       </div>
       <div class="form-group">
-        <label for="hyouji">表示</label>
-        <select name="hyouji" class="form-control">
+        <label for="hyouji_id">表示</label>
+        <select name="hyouji_id" class="form-control">
           <option>選択してください</option>
           @foreach ($hyouji as $hyoujis)
           <option class="form-control" value="hyouji_id">
@@ -57,7 +57,7 @@
           </option>
           @endforeach
         </select>
-        @error('hyouji')
+        @error('hyouji_id')
         <span style="color:red;">選択してください</span>
         @enderror
       </div>

@@ -32,9 +32,7 @@ return new class extends Migration
             $table->foreign('syouhin_id')
                 ->references('id')
                 ->on('syouhins');
-            $table->float('tanka', 9, 2);
             $table->float('suuryou', 6, 2);
-            $table->float('kingaku', 13, 2);
             $table->unsignedBigInteger('hyouji_id')->default(1);
             $table->foreign('hyouji_id')
                 ->references('id')

@@ -52,26 +52,26 @@
   <table class="table table-sm" id="urikake" data-pagination="true" data-search="true" data-show-footer="true" data-toggle="table">
     <thead>
       <tr class="table-warning">
-        <th>ID</th>
-        <th data-sortable="true">日付</th>
-        <th>工場</th>
-        <th>納入先</th>
-        <th>現場</th>
-        <th>商品</th>
-        <th>単価</th>
-        <th>数量</th>
-        <th>金額</th>
-        <th>表示</th>
-        <th>備考</th>
+        <th class="text-end">ID</th>
+        <th class="text-center" data-sortable="true">日付</th>
+        <th class="text-left">工場</th>
+        <th class="text-left">納入先</th>
+        <th class="text-left">現場</th>
+        <th class="text-left">商品</th>
+        <th class="text-end">単価</th>
+        <th class="text-end">数量</th>
+        <th class="text-end">金額</th>
+        <th class="text-center">表示</th>
+        <th class="text-left">備考</th>
         <th class="text-center">編集</th>
-        <th>削除</th>
+        <th class="text-center">削除</th>
       </tr>
     </thead>
     <tbody>
       @foreach($urikake as $urikakes)
       <tr>
-        <td>{{ $urikakes->id }}</td>
-        <td>{{ $urikakes->hiduke }}</td>
+        <td class="text-end">{{ $urikakes->id }}</td>
+        <td class="text-center">{{ $urikakes->hiduke }}</td>
         @foreach ($koujyou as $koujyous)
         @if($urikakes->koujyou_id == $koujyous->id)
         <td>{{ $koujyous->meisyou }}</td>
@@ -92,9 +92,9 @@
         <td>{{ $syouhins->meisyou }}</td>
         @endif
         @endforeach
-        <td class="text-right">{{number_format($urikakes->tanka)}}</td>
+        <td class="text-end">{{number_format($urikakes->tanka)}}</td>
         <td>{{ number_format($urikakes->suuryou,1) }}</td>
-        <td class="text-right" class1="kingaku">{{number_format($urikakes->kingaku)}}</td>
+        <td class="text-end" class1="kingaku">{{ number_format($urikakes->kingaku) }}</td>
         @foreach ($hyouji as $hyoujis)
         @if($urikakes->hyouji_id == $hyoujis->id)
         <td>{{ $hyoujis->meisyou }}</td>
@@ -104,7 +104,7 @@
         <td class="text-center">
           <a href="{{ route('urikakes.edit', $urikakes->id)}}" class="btn btn-primary btn-sm">編集</a>
         </td>
-        <td>
+        <td class="text-center">
           <form action=" {{ route('urikakes.destroy', $urikakes->id)}}" method="post" style="display: inline-block">
             @csrf
             @method('DELETE')
@@ -113,6 +113,21 @@
         </td>
       </tr>
       @endforeach
+      <tr>
+        <td></td>
+        <td>合計</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td id="goukei"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
     </tbody>
     <tfoot>
       <tr class="table-warning">
@@ -127,11 +142,31 @@
         <td></td>
         <td></td>
         <td></td>
+        <td></td>
       </tr>
     </tfoot>
-
   </table>
-
   <div>
+    <script type="text/javascript">
+      window.onload = function() {
+        var tableElem = document.getElementById('urikake');
+        var rowElems = tableElem.rows;
+        var sum_kingaku = 0;
+        for (i = 1, len = rowElems.length - 2; i < len; i++) {
+          sum_kingaku += parseInt(removeComma(rowElems[i].cells[8].innerText));
+        }
+        document.getElementById('goukei').innerText = sum_kingaku.toLocaleString();
+      }
+
+      window.addEventListener('DOMContentLoaded', function(e) {
+        var tableElem = document.getElementById('urikake');
+        var rowElems = tableElem.rows;
+        var sum_kingaku = 0;
+        for (i = 1, len = rowElems.length - 2; i < len; i++) {
+          sum_kingaku += parseInt(removeComma(rowElems[i].cells[8].innerText));
+        }
+        document.getElementById('goukei').innerText = sum_kingaku.toLocaleString();
+}, false);
+    </script>
 
     @endsection

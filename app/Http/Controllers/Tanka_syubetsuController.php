@@ -25,6 +25,7 @@ class Tanka_syubetsuController extends Controller
             'tanka_syubetsus.bikou'
         )
             ->join('hyoujis', 'hyoujis.id', '=', 'tanka_syubetsus.hyouji_id')
+            ->orderByRaw('id desc')
             ->get();
         return view('tanka_syubetsu-index', compact('tanka_syubetsu', 'hyouji'));
     }

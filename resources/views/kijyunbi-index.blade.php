@@ -51,18 +51,17 @@
   <table class="table">
     <thead>
       <tr class="table-warning">
-        <td>ID</td>
-        <td>基準日</td>
-        <td>表示</td>
-        <td>備考</td>
-        <td class="text-center">編集</td>
+        <th class="text-end">ID</th>
+        <th class="text-center">基準日</th>
+        <th class="text-center">表示</th>
+        <th class="text-left">備考</th>
       </tr>
     </thead>
     <tbody>
       @foreach($kijyunbi as $kijyunbis)
       <tr>
-        <td>{{$kijyunbis->id}}</td>
-        <td>{{$kijyunbis->hiduke}}</td>
+        <td class="text-end">{{$kijyunbis->id}}</td>
+        <td class="text-center">{{$kijyunbis->hiduke}}</td>
         @foreach ($hyouji as $hyoujis)
         @if($kijyunbis->hyouji_id == $hyoujis->id)
         <td>{{ $hyoujis->meisyou }}</td>
@@ -71,6 +70,8 @@
         <td>{{$kijyunbis->bikou}}</td>
         <td class="text-center">
           <a href="{{ route('kijyunbis.edit', $kijyunbis->id)}}" class="btn btn-primary btn-sm">編集</a>
+        </td>
+        <td class="text-center">
           <form action="{{ route('kijyunbis.destroy', $kijyunbis->id)}}" method="post" style="display: inline-block">
             @csrf
             @method('DELETE')
@@ -80,6 +81,21 @@
       </tr>
       @endforeach
     </tbody>
+    <tfoot>
+      <tr class="table-warning">
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tfoot>
   </table>
   <div>
     @endsection

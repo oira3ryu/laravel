@@ -34,8 +34,8 @@
               <input type="text" class="form-control" name="kana" value="{{ $hyouji->kana }}"/>
           </div>
           <div class="form-group">
-              <label for="hyouji">表示</label>
-              <input type="text" class="form-control" name="hyouji" value="{{ $hyouji->hyouji }}"/>
+              <label for="hyouji_id">表示</label>
+              <input type="text" class="form-control" name="hyouji_id" value="{{ $hyouji->hyouji }}"/>
           </div>
           <div class="form-group">
               <label for="bikou">備考</label>

@@ -31,15 +31,15 @@
         <input type="date" class="form-control" name="hiduke" value="{{ $kijyunbi->hiduke }}" />
       </div>
       <div class="form-group">
-        <label for="hyouji">表示</label>
-        <select name="hyouji" class="form-control">
+        <label for="hyouji_id">表示</label>
+        <select name="hyouji_id" class="form-control">
           <option>選択してください</option>
           @foreach ($hyouji as $hyoujis)
           <option class="{{ $hyoujis->id }}" value="{{ old('id', $hyoujis->id) }}" @if($hyoujis->id==$kijyunbi->hyouji_id || $hyoujis->id === (int)old('id')) selected @endif>{{ $hyoujis->meisyou }}
           </option>
           @endforeach
         </select>
-        @error('hyouji')
+        @error('hyouji_id')
         <span style="color:red;">選択してください</span>
         @enderror
         <div class="form-group">

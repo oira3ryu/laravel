@@ -21,15 +21,16 @@ class SyouhinController extends Controller
         $syouhin = Syouhin::select(
             'syouhins.id',
             'syouhins.syouhin_syubetsu_id',
-            'syouhin_syubetsus.meisyou',
+            //'syouhin_syubetsus.meisyou',
             'syouhins.meisyou',
             'syouhins.kana',
             'syouhins.hyouji_id',
-            'hyoujis.meisyou',
+            //'hyoujis.meisyou',
             'syouhins.bikou'
         )
             ->join('syouhin_syubetsus', 'syouhin_syubetsus.id', '=', 'syouhins.syouhin_syubetsu_id')
             ->join('hyoujis', 'hyoujis.id', '=', 'syouhins.hyouji_id')
+            ->orderByRaw('id desc')
             ->get();
         return view('syouhin-index', compact('syouhin', 'syouhin_syubetsu', 'hyouji'));
     }

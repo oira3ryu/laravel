@@ -34,8 +34,8 @@
         <input type="text" class="form-control" name="kana" />
       </div>
       <div class="form-group">
-        <label for="hyouji">表示</label>
-        <input type="text" class="form-control" name="hyouji" />
+        <label for="hyouji_id">表示</label>
+        <input type="text" class="form-control" name="hyouji_id" />
       </div>
       <div class="form-group">
         <label for="bikou">備考</label>

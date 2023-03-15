@@ -37,6 +37,7 @@ class TankaController extends Controller
             ->join('syouhins', 'syouhins.id', '=', 'tankas.syouhin_id')
             ->join('tanka_syubetsus', 'tanka_syubetsus.id', '=', 'tankas.tanka_syubetsu_id')
             ->join('hyoujis', 'hyoujis.id', '=', 'tankas.hyouji_id')
+            ->orderByRaw('kaishibi desc, id desc')
             ->get();
         return view('tanka-index', compact('tanka', 'hyouji', 'syouhin', 'tanka_syubetsu'));
     }

@@ -21,6 +21,7 @@ class KijyunbiController extends Controller
             'kijyunbis.bikou'
         )
             ->join('hyoujis', 'hyoujis.id', '=', 'kijyunbis.hyouji_id')
+            ->orderByRaw('id desc')
             ->get();
         return view('kijyunbi-index', compact('kijyunbi', 'hyouji'));
     }

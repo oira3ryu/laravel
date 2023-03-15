@@ -25,6 +25,7 @@ class Syouhin_syubetsuController extends Controller
             'syouhin_syubetsus.bikou'
         )
             ->join('hyoujis', 'hyoujis.id', '=', 'syouhin_syubetsus.hyouji_id')
+            ->orderByRaw('id desc')
             ->get();
         return view('syouhin_syubetsu-index', compact('syouhin_syubetsu', 'hyouji'));
     }

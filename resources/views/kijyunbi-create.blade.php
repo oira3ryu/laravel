@@ -30,7 +30,7 @@
         <input type="date" class="form-control" name="hiduke" />
       </div>
       <div class="form-group">
-        <label for="hyouji">表示</label>
+        <label for="hyouji_id">表示</label>
         <input type="text" class="form-control" name="hyouji_id" />
       </div>
       <div class="form-group">

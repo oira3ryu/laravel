@@ -28,12 +28,7 @@
       <div class="col-sm">
         <a href="{{ route('nebikis.index')}}" class="btn btn-info btn-sm m-1">値引</a>
       </div>
-      <div class="col-sm">
 
-      </div>
-      <div class="col-sm">
-
-      </div>
       <div class="col-sm">
 
       </div>
@@ -45,24 +40,25 @@
       </div>
     </div>
   </div>
-  <table class="table">
+  <table class="table table-sm" id="tanka" data-pagination="true" data-search="true" data-show-footer="true" data-toggle="table">
     <thead>
       <tr class="table-warning">
-        <td>ID</td>
-        <td>商品</td>
-        <td>単価種別</td>
-        <td>単価</td>
-        <td>開始日</td>
-        <td>終了日</td>
-        <td>表示</td>
-        <td>備考</td>
-        <td class="text-center">編集</td>
+        <th class="text-end">ID</th>
+        <th class="text-left">商品</th>
+        <th class="text-center">単価種別</th>
+        <th class="text-end">単価</th>
+        <th class="text-center">開始日</th>
+        <th class="text-center">終了日</th>
+        <th class="text-center">表示</th>
+        <th class="text-left">備考</th>
+        <th class="text-center">編集</th>
+        <th class="text-center">削除</th>      
       </tr>
     </thead>
     <tbody>
       @foreach($tanka as $tankas)
       <tr>
-        <td>{{ $tankas->id}}</td>
+        <td class="text-end">{{ $tankas->id}}</td>
         @foreach ($syouhin as $syouhins)
         @if($tankas->syouhin_id == $syouhins->id)
         <td>{{ $syouhins->meisyou }}</td>
@@ -73,7 +69,7 @@
         <td>{{ $tanka_syubetsus->meisyou }}</td>
         @endif
         @endforeach
-        <td>{{ $tankas->tanka }}</td>
+        <td class="text-end">{{number_format($tankas->tanka)}}</td>
         <td>{{ $tankas->kaishibi }}</td>
         <td>{{ $tankas->syuuryoubi }}</td>
         @foreach ($hyouji as $hyoujis)
@@ -84,6 +80,8 @@
         <td>{{ $tankas->bikou }}</td>
         <td class="text-center">
           <a href="{{ route('tankas.edit', $tankas->id)}}" class="btn btn-primary btn-sm">編集</a>
+        </td>
+        <td class="text-center">
           <form action="{{ route('tankas.destroy', $tankas->id)}}" method="post" style="display: inline-block">
             @csrf
             @method('DELETE')
@@ -93,6 +91,20 @@
       </tr>
       @endforeach
     </tbody>
+     <tfoot>
+      <tr class="table-warning">
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tfoot>   
   </table>
   <div>
     @endsection

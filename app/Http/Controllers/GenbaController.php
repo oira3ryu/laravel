@@ -35,6 +35,7 @@ class GenbaController extends Controller
             ->join('koujyous', 'koujyous.id', '=', 'genbas.koujyou_id')
             ->join('nounyusakis', 'nounyusakis.id', '=', 'genbas.nounyusaki_id')
             ->join('hyoujis', 'hyoujis.id', '=', 'genbas.hyouji_id')
+            ->orderByRaw('id desc')
             ->get();
         return view('genba-index', compact('genba', 'koujyou', 'nounyusaki', 'hyouji'));
     }
@@ -58,14 +59,16 @@ class GenbaController extends Controller
      */
     public function store(Request $request)
     {
-        $storeData = $request->validate([
-            'koujyou_id' => 'required',
-            'nounyusaki_id' => 'required',
-            'meisyou' => 'required|max:255',
-            'kana' => 'required|max:255',
-            'hyouji_id' => 'required',
-            'bikou' => 'max:255',
-        ]);
+        $storeData = $request->validate(
+            [
+                'koujyou_id' => 'required',
+                'nounyusaki_id' => 'required',
+                'meisyou' => 'required|max:255',
+                'kana' => 'required|max:255',
+                'hyouji_id' => 'required',
+                'bikou' => 'max:255',
+            ],
+        );
         $genba = Genba::create($storeData);
         return redirect('/genbas')->with('completed', 'Genba has been saved!');
     }
@@ -109,7 +112,8 @@ class GenbaController extends Controller
             'kana' => 'required|max:255',
             'hyouji_id' => 'required',
             'bikou' => 'max:255',
-        ]);
+            ],
+    );
         Genba::whereId($id)->update($updateData);
         return redirect('/genbas')->with('completed', 'Genba has been updated');
     }

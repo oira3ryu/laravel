@@ -18,7 +18,7 @@ when syouhins.syouhin_syubetsu_id < 2 then
 else 
  ((tankas.tanka) * urikakes.suuryou)
 end as kingaku,
-urikakes.hyouji,
+urikakes.hyouji_id,
 hyoujis.meisyou,
 urikakes.bikou,
 nebikis.tanka_syubetsu_id FROM urikakes 
@@ -28,7 +28,7 @@ LEFT JOIN nounyusakis ON urikakes.nounyusaki_id = nounyusakis.id
 LEFT JOIN koujyous ON urikakes.koujyou_id = koujyous.id
 LEFT JOIN genbas ON urikakes.genba_id = genbas.id
 LEFT JOIN syouhins ON urikakes.syouhin_id = syouhins.id
-LEFT JOIN hyoujis ON urikakes.hyouji = hyoujis.id
+LEFT JOIN hyoujis ON urikakes.hyouji_id = hyoujis.id
 RIGHT JOIN nebikis ON urikakes.nounyusaki_id = nebikis.nounyusaki_id AND nounyusakis.id = nebikis.nounyusaki_id AND nebikis.tanka_syubetsu_id = tanka_syubetsus.id
 WHERE tankas.kaishibi >= 
 (SELECT MAX(tankas.kaishibi) FROM tankas, tanka_syubetsus, urikakes, nebikis 

@@ -37,6 +37,7 @@ class NebikiController extends Controller
             ->join('nounyusakis', 'nounyusakis.id', '=', 'nebikis.nounyusaki_id')
             ->join('tanka_syubetsus', 'tanka_syubetsus.id', '=', 'nebikis.tanka_syubetsu_id')
             ->join('hyoujis', 'hyoujis.id', '=', 'nebikis.hyouji_id')
+            ->orderByRaw('kaishibi desc, id desc')
             ->get();
         return view('nebiki-index', compact('nebiki', 'koujyou', 'hyouji', 'nounyusaki', 'tanka_syubetsu'));
     }

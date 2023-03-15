@@ -48,27 +48,30 @@
     </div>
   </div>
 </div>  
-  <table class="table">
+  <table class="table table-sm" id="hyouji" data-pagination="true" data-search="true" data-show-footer="true" data-toggle="table">
     <thead>
         <tr class="table-warning">
-          <td>ID</td>
-          <td>名称</td>
-          <td>カナ</td>
-          <td>表示</td>
-          <td>備考</td>
-          <td class="text-center">編集</td>
+        <th class="text-end">ID</th>
+        <th class="text-left">名称</th>
+        <th class="text-left">カナ</th>
+        <th class="text-center">表示</th>
+        <th class="text-left">備考</th>
+        <th class="text-center">編集</th>
+        <th class="text-center">削除</th>
         </tr>
     </thead>
     <tbody>
         @foreach($hyouji as $hyoujis)
         <tr>
-            <td>{{$hyoujis->id}}</td>
+            <td class="text-end">{{$hyoujis->id}}</td>
             <td>{{$hyoujis->meisyou}}</td>
             <td>{{$hyoujis->kana}}</td>
             <td>{{$hyoujis->hyouji}}</td>
             <td>{{$hyoujis->bikou}}</td>
             <td class="text-center">
                 <a href="{{ route('hyoujis.edit', $hyoujis->id)}}" class="btn btn-primary btn-sm"">編集</a>
+        </td>
+        <td class="text-center">
                 <form action="{{ route('hyoujis.destroy', $hyoujis->id)}}" method="post" style="display: inline-block">
                     @csrf
                     @method('DELETE')
@@ -78,6 +81,21 @@
         </tr>
         @endforeach
     </tbody>
+    <tfoot>
+      <tr class="table-warning">
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tfoot>
   </table>
 <div>
 @endsection

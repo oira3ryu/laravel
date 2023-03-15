@@ -43,7 +43,13 @@ class UrikakeController extends Controller
             'urikakes.syouhin_id',
             'syouhins.meisyou',
             'tankas.kaishibi',
-            'tankas.tanka',
+            //'tankas.tanka',
+            Urikake::raw('case 
+             when syouhins.syouhin_syubetsu_id <= 2 then
+             tankas.tanka + nebikis.nebiki
+            else 
+             tankas.tanka
+            end as tanka'),
             'urikakes.suuryou',
             Urikake::raw('case 
              when syouhins.syouhin_syubetsu_id <= 2 then

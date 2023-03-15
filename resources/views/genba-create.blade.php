@@ -24,7 +24,7 @@
         </div><br />
         @endif
         <form method="post" action="{{ route('genbas.store') }}">
-            <div class="form-group @if(!empty($errors->first('koujyou_id'))) has-error @endif">
+            <div class="form-group">
                 @csrf
                 <label for="koujyou_id">工場</label>
                 <select name="koujyou_id" class="form-control">
@@ -39,7 +39,7 @@
                 <span style="color:red;">選択してください</span>
                 @enderror
             </div>
-            <div class="form-group @if(!empty($errors->first('nounyusaki_id'))) has-error @endif">
+            <div class="form-group">
                 <label for="nounyusaki_id">納入先</label>
                 <select name="nounyusaki_id" class="form-control">
                     <option>選択してください</option>
@@ -53,34 +53,31 @@
                 <span style="color:red;">選択してください</span>
                 @enderror
             </div>
-            <div class="form-group @if(!empty($errors->first('meisyou'))) has-error @endif">
+            <div class="form-group">
                 <label for="meisyou">名称</label>
-                <input type="text" value="{{old('meisyou')}}" class="form-control" name="meisyou" />
-                <span class="help-block">{{$errors->first('meisyou')}}</span>
+                <input type="text" class="form-control" name="meisyou" />
             </div>
-            <div class="form-group @if(!empty($errors->first('kana'))) has-error @endif">
+            <div class="form-group">
                 <label for="kana">カナ</label>
-                <input type="text" value="{{old('kana')}}" class="form-control" name="kana" />
-                <span class="help-block">{{$errors->first('kana')}}</span>
+                <input type="text" class="form-control" name="kana" />
             </div>
-            <div class="form-group @if(!empty($errors->first('hyouji_id'))) has-error @endif">
+            <div class="form-group">
                 <label for="hyouji_id">表示</label>
                 <select name="hyouji_id" class="form-control">
                     <option>選択してください</option>
                     @foreach ($hyouji as $hyoujis)
-                    <option class="form-control" value="{{ $hyouji->id }}">
+                    <option class="form-control" value="{{ $hyoujis->id }}">
                         {{ $hyoujis->meisyou }}
                     </option>
                     @endforeach
                 </select>
-                @error('hyouji')
+                @error('hyouji_id')
                 <span style="color:red;">選択してください</span>
                 @enderror
             </div>
-            <div class="form-group @if(!empty($errors->first('bikou'))) has-error @endif">
+            <div class="form-group">
                 <label for="bikou">備考</label>
-                <input type="text" value="{{old('bikou')}}" class="form-control" name="bikou" />
-                <span class="help-block">{{$errors->first('bikou')}}</span>
+                <input type="text" class="form-control" name="bikou" />
             </div>
             <button type="submit" class="btn btn-block btn-danger">追加</button>
             <a href="{{ route('genbas.index')}}" class="btn btn-block btn-info">戻る</a>

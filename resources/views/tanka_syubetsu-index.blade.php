@@ -48,21 +48,22 @@
       </div>
     </div>
   </div>
-  <table class="table">
+  <table class="table table-sm" id="tanka" data-pagination="true" data-search="true" data-show-footer="true" data-toggle="table">
     <thead>
       <tr class="table-warning">
-        <td>ID</td>
-        <td>名称</td>
-        <td>カナ</td>
-        <td>表示</td>
-        <td>備考</td>
-        <td class="text-center">編集</td>
+        <th class="text-end">ID</th>
+        <th class="text-left">名称</th>
+        <th class="text-left">カナ</th>
+        <th class="text-center">表示</th>
+        <th class="text-left">備考</th>
+        <th class="text-center">編集</th>
+        <th class="text-center">削除</th>
       </tr>
     </thead>
     <tbody>
       @foreach($tanka_syubetsu as $tanka_syubetsus)
       <tr>
-        <td>{{$tanka_syubetsus->id}}</td>
+        <td class="text-end">{{$tanka_syubetsus->id}}</td>
         <td>{{$tanka_syubetsus->meisyou}}</td>
         <td>{{$tanka_syubetsus->kana}}</td>
         @foreach ($hyouji as $hyoujis)
@@ -72,16 +73,31 @@
         @endforeach
         <td>{{$tanka_syubetsus->bikou}}</td>
         <td class="text-center">
-          <a href="{{ route('tanka_syubetsus.edit', $tanka_syubetsus->id)}}" class="btn btn-primary btn-sm"">編集</a>
+          <a href="{{ route('tanka_syubetsus.edit', $tanka_syubetsus->id)}}" class="btn btn-primary btn-sm">編集</a>
+        </td>
+        <td class="text-center">
                 <form action=" {{ route('tanka_syubetsus.destroy', $tanka_syubetsus->id)}}" method="post" style="display: inline-block">
             @csrf
             @method('DELETE')
-            <button class="btn btn-danger btn-sm"" type=" submit">削除</button>
+            <button class="btn btn-danger btn-sm" type=" submit">削除</button>
             </form>
         </td>
       </tr>
       @endforeach
     </tbody>
+     <tfoot>
+      <tr class="table-warning">
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tfoot>   
   </table>
   <div>
     @endsection

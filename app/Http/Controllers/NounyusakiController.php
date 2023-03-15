@@ -30,6 +30,7 @@ class NounyusakiController extends Controller
         )
             ->join('koujyous', 'koujyous.id', '=', 'nounyusakis.koujyou_id')
             ->join('hyoujis', 'hyoujis.id', '=', 'nounyusakis.hyouji_id')
+            ->orderByRaw('id desc')
             ->get();
         return view('nounyusaki-index', compact('nounyusaki', 'koujyou', 'hyouji'));
     }

@@ -31,7 +31,8 @@
                 <select name="koujyou_id" class="form-control">
                     <option>選択してください</option>
                     @foreach ($koujyou as $koujyous)
-                    <option class="{{ $koujyous->id }}" class1="{{ $koujyous->id }}" value="{{ old('id', $koujyous->id) }}" @if($koujyous->id==$genba->koujyou_id || $koujyous->id === (int)old('id')) selected @endif>{{ $koujyous->meisyou }}
+                    <option value="{{ $koujyous->id }}" class="{{ $koujyous->id }}" class1="{{ $koujyous->id }}">
+                        {{ $koujyous->meisyou }}
                     </option>
                     @endforeach
                 </select>
@@ -44,7 +45,8 @@
                 <select name="nounyusaki_id" class="form-control">
                     <option>選択してください</option>
                     @foreach ($nounyusaki as $nounyusakis)
-                    <option class="{{ $nounyusakis->id }}" class1="{{ $nounyusakis->koujyou_id }}" value="{{ old('id', $nounyusakis->id) }}" @if($nounyusakis->id==$genba->nounyusaki_id || $nounyusakis->id === (int)old('id')) selected @endif>{{ $nounyusakis->meisyou }}
+                    <option value="{{ $nounyusakis->id }}" class="{{ $nounyusakis->id }}" class1="{{ $nounyusakis->koujyou_id }}">
+                        {{ $nounyusakis->meisyou }}
                     </option>
                     @endforeach
                 </select>
@@ -54,28 +56,29 @@
             </div>
             <div class="form-group">
                 <label for="meisyou">名称</label>
-                <input type="text" class="form-control" name="meisyou" value="{{ $genba->meisyou }}" />
+                <input type="text" value="{{ $genba->meisyou }}" class="form-control" name="meisyou" />
             </div>
             <div class="form-group">
                 <label for="kana">カナ</label>
-                <input type="text" class="form-control" name="kana" value="{{ $genba->kana }}" />
+                <input type="text" value="{{ $genba->kana }}" class="form-control" name="kana" />
             </div>
             <div class="form-group">
-                <label for="hyouji">表示</label>
-                <select name="hyouji" class="form-control">
+                <label for="hyouji_id">表示</label>
+                <select name="hyouji_id" class="form-control">
                     <option>選択してください</option>
                     @foreach ($hyouji as $hyoujis)
-                    <option class="{{ $hyoujis->id }}" value="{{ old('id', $hyoujis->id) }}" @if($hyoujis->id==$genba->hyouji_id || $hyoujis->id === (int)old('id')) selected @endif>{{ $hyoujis->meisyou }}
+                    <option value="{{ $hyoujis->id }}" class="{{ $hyoujis->id }}">
+                        {{ $hyoujis->meisyou }}
                     </option>
                     @endforeach
                 </select>
-                @error('hyouji')
+                @error('hyouji_id')
                 <span style="color:red;">選択してください</span>
                 @enderror
             </div>
             <div class="form-group">
                 <label for="bikou">備考</label>
-                <input type="text" class="form-control" name="bikou" value="{{ $genba->bikou }}" />
+                <input type="text" value="{{ $genba->bikou }}" class="form-control" name="bikou" />
             </div>
             <button type="submit" class="btn btn-block btn-danger">更新</button>
             <a href="{{ route('genbas.index')}}" class="btn btn-block btn-info">戻る</a>

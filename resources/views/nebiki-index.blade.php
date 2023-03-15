@@ -48,25 +48,26 @@
       </div>
     </div>
   </div>
-  <table class="table">
+  <table class="table table-sm" id="nebiki" data-pagination="true" data-search="true" data-show-footer="true" data-toggle="table">
     <thead>
       <tr class="table-warning">
-        <td>ID</td>
-        <td>工場</td>
-        <td>納入先</td>
-        <td>単価種別</td>
-        <td>値引</td>
-        <td>開始日</td>
-        <td>終了日</td>
-        <td>表示</td>
-        <td>備考</td>
-        <td class="text-center">編集</td>
+        <th class="text-end">ID</th>
+        <th class="text-left">工場</th>
+        <th class="text-left">納入先</th>
+        <th class="text-center">単価種別</th>
+        <th class="text-end">値引</th>
+        <th class="text-center">開始日</th>
+        <th class="text-center">終了日</th>
+        <th class="text-center">表示</th>
+        <th class="text-left">備考</th>
+        <th class="text-center">編集</th>
+        <th class="text-center">削除</th>
       </tr>
     </thead>
     <tbody>
       @foreach($nebiki as $nebikis)
       <tr>
-        <td>{{$nebikis->id}}</td>
+        <td class="text-end">{{$nebikis->id}}</td>
         @foreach ($koujyou as $koujyous)
         @if($nebikis->koujyou_id == $koujyous->id)
         <td>{{ $koujyous->meisyou }}</td>
@@ -82,9 +83,9 @@
         <td>{{ $tanka_syubetsus->meisyou }}</td>
         @endif
         @endforeach
-        <td>{{$nebikis->nebiki}}</td>
-        <td>{{$nebikis->kaishibi}}</td>
-        <td>{{$nebikis->syuuryoubi}}</td>
+        <td class="text-end">{{$nebikis->nebiki}}</td>
+        <td class="text-center">{{$nebikis->kaishibi}}</td>
+        <td class="text-center">{{$nebikis->syuuryoubi}}</td>
         @foreach ($hyouji as $hyoujis)
         @if($nebikis->hyouji_id == $hyoujis->id)
         <td>{{ $hyoujis->meisyou }}</td>
@@ -93,7 +94,9 @@
         <td>{{$nebikis->bikou}}</td>
         <td class="text-center">
           <a href="{{ route('nebikis.edit', $nebikis->id)}}" class="btn btn-primary btn-sm"">編集</a>
-                <form action=" {{ route('nebikis.destroy', $nebikis->id)}}" method="post" style="display: inline-block">
+        </td>
+        <td class="text-center">
+          <form action=" {{ route('nebikis.destroy', $nebikis->id)}}" method="post" style="display: inline-block">
             @csrf
             @method('DELETE')
             <button class="btn btn-danger btn-sm"" type=" submit">削除</button>
@@ -102,6 +105,21 @@
       </tr>
       @endforeach
     </tbody>
+    <tfoot>
+      <tr class="table-warning">
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tfoot>
   </table>
   <div>
     @endsection

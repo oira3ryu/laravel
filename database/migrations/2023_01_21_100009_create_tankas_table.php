@@ -25,7 +25,7 @@ return new class extends Migration
                 ->on('tanka_syubetsus');
             $table->integer('tanka');
             $table->date('kaishibi');
-            $table->date('syuuryoubi');
+            $table->date('syuuryoubi')->nullable();
             $table->unsignedBigInteger('hyouji_id')->default(1);
             $table->foreign('hyouji_id')
                 ->references('id')

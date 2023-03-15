@@ -38,9 +38,6 @@
 
       </div>
       <div class="col-sm">
-
-      </div>
-      <div class="col-sm">
         <a href="{{ route('urikakes.index')}}" class="btn btn-info btn-sm m-1">売掛</a>
       </div>
       <div class="col-sm">
@@ -48,23 +45,28 @@
       </div>
     </div>
   </div>
-  <table class="table">
+  <table class="table table-sm" id="syouhin" data-pagination="true" data-search="true" data-show-footer="true" data-toggle="table">
     <thead>
       <tr class="table-warning">
-        <td>ID</td>
-        <td>商品種別</td>
-        <td>名称</td>
-        <td>カナ</td>
-        <td>表示</td>
-        <td>備考</td>
-        <td class="text-center">編集</td>
+        <th class="text-end">ID</th>
+        <th class="text-left">商品種別</th>
+        <th class="text-left">名称</th>
+        <th class="text-left">カナ</th>
+        <th class="text-center">表示</th>
+        <th class="text-left">備考</th>
+        <th class="text-center">編集</th>
+        <th class="text-center">削除</th>   
       </tr>
     </thead>
     <tbody>
       @foreach($syouhin as $syouhins)
       <tr>
-        <td>{{$syouhins->id}}</td>
-        <td>{{$syouhins->syouhin_syubetsu_id}}</td>
+        <td class="text-end">{{$syouhins->id}}</td>
+        @foreach ($syouhin_syubetsu as $syouhin_syubetsus)
+        @if($syouhins->syouhin_syubetsu_id == $syouhin_syubetsus->id)
+        <td>{{ $syouhin_syubetsus->meisyou }}</td>
+        @endif
+        @endforeach
         <td>{{$syouhins->meisyou}}</td>
         <td>{{$syouhins->kana}}</td>
         @foreach ($hyouji as $hyoujis)
@@ -75,7 +77,9 @@
         <td>{{$syouhins->bikou}}</td>
         <td class="text-center">
           <a href="{{ route('syouhins.edit', $syouhins->id)}}" class="btn btn-primary btn-sm"">編集</a>
-                <form action=" {{ route('syouhins.destroy', $syouhins->id)}}" method="post" style="display: inline-block">
+        </td>
+        <td class="text-center">
+          <form action=" {{ route('syouhins.destroy', $syouhins->id)}}" method="post" style="display: inline-block">
             @csrf
             @method('DELETE')
             <button class="btn btn-danger btn-sm"" type=" submit">削除</button>
@@ -84,6 +88,20 @@
       </tr>
       @endforeach
     </tbody>
+     <tfoot>
+      <tr class="table-warning">
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tfoot>   
   </table>
   <div>
     @endsection

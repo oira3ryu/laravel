@@ -91,17 +91,17 @@
                 <input type="text" value="{{old('suuryou')}}" class="form-control" name="suuryou" />
                 <span class="help-block">{{$errors->first('suuryou')}}</span>
             </div>
-            <div class="form-group @if(!empty($errors->first('hyouji'))) has-error @endif">
-                <label for="hyouji">表示</label>
-                <select name="hyouji" class="form-control">
-                    <option>選択してください</option>
+            <div class="form-group @if(!empty($errors->first('hyouji_id'))) has-error @endif">
+                <label for="hyouji_id">表示</label>
+                <select name="hyouji_id" class="form-control">
+
                     @foreach ($hyouji as $hyoujis)
-                    <option class="form-control" value="{{ $hyoujis->id }}">
+                    <option class="form-control" value="{{ $hyoujis->id }}" selected="selected">
                         {{ $hyoujis->meisyou }}
                     </option>
                     @endforeach
                 </select>
-                @error('hyouji')
+                @error('hyouji_id')
                 <span style="color:red;">選択してください</span>
                 @enderror
             </div>
